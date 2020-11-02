@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Puzzle Block game</title>
+    <script type="text/javascript" src="PuzzleBlock.js" ></script> 
+</head>
+<body>
+    <canvas id="myCanvas" width="1200" height="660" style="border:1px solid #d3d3d3;">
+    </canvas>
+    <script>
+        //dibujar();
+        var PrimerMarco = new MarcosCuadros(35, 50, 155, 520);
+        PrimerMarco.dibujar();
+        var SegundoMarco = new MarcosCuadros(240, 15, 630, 630);
+        SegundoMarco.dibujar();
+        var TercerMarco = new MarcosCuadros(920, 300, 200, 320);
+        TercerMarco.dibujar();
+    </script>
+ </body>
+
+</html>
