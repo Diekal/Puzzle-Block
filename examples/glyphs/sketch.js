@@ -8,13 +8,13 @@ function setup() {
   polyomino = createPolyomino([[color('cyan'), '👽',             0    ],
                                [0,             '🤔',            '🙈' ],
                                [0,             color('#770811'), 0   ],
-                               ['g',           'o',             'l'  ]
+                               ['g',           'o',             "1" ]
                               ]);
 }
 
 function draw() {
   background('#060621');
-  drawPolyomino(polyomino, 2, 4, LENGTH, 2, 'red');
+  drawPolyomino(polyomino, 2, 4, LENGTH, 2, 'black');
 }
 
 function keyPressed() {
