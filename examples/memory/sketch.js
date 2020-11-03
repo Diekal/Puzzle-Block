@@ -13,11 +13,7 @@ function setup() {
       tableau[i][j] = 0;
     }
   }
-  polyomino = createPolyomino([[color('cyan'), '👽',             0    ],
-                               [0,             '🤔',            '🙈' ],
-                               [0,             color('#770811'), 0   ],
-                               ['g',           'o',             'l'  ]
-                              ]);
+  polyomino = createPolyomino(elegir_p());
   glue(polyomino, 4, 2);
 }
 

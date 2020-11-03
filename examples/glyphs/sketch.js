@@ -4,12 +4,8 @@ const LENGTH = 20;
 var polyomino;
 
 function setup() {
-  createCanvas(COLS * LENGTH, ROWS * LENGTH);
-  polyomino = createPolyomino([[color('cyan'), '👽',             0    ],
-                               [0,             '🤔',            '🙈' ],
-                               [0,             color('#770811'), 0   ],
-                               ['g',           'o',             "1" ]
-                              ]);
+  createCanvas(700, 700);
+  polyomino = createPolyomino(elegir_p());
 }
 
 function draw() {
@@ -22,6 +18,13 @@ function keyPressed() {
     polyomino.reflect();
   } else if (keyCode === DOWN_ARROW) {
     polyomino.rotate();
+  }
+}
+function mouseDragged() {
+  if ( (mouseX >(polyomino.posx*(-3))) && (mouseX < (polyomino.posx*(3)))) {
+    if ( (mouseY >(polyomino.posy*(-3))) && (mouseY < (polyomino.posy*(3))) ){
+      polyomino.move_p(mouseX,mouseY);
+    }
   }
 }
 
