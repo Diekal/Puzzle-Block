@@ -21,11 +21,7 @@ function keyPressed() {
   }
 }
 function mouseDragged() {
-  if ( (mouseX >(polyomino.posx*(-3))) && (mouseX < (polyomino.posx*(3)))) {
-    if ( (mouseY >(polyomino.posy*(-3))) && (mouseY < (polyomino.posy*(3))) ){
-      polyomino.move_p(mouseX,mouseY);
-    }
-  }
+  polyomino.move_p(mouseX,mouseY);
 }
 
 function debugPolyomino(polyomino) {

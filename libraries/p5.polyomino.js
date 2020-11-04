@@ -6,6 +6,7 @@ class Polyomino {
     this._shape = shape;
     this.posx = 30;
     this.posy = 30;
+    this.longitud = 20;
   }
 
   set shape(shape) {
@@ -32,8 +33,12 @@ class Polyomino {
     this
   }
   move_p(mX,mY){
-    this.posx = mX;
-    this.posy = mY;
+    if (mX >= ((this.posx)-(this.longitud*2))  &&  mX <= ((this.posx)+(this.longitud*(this.shape[0].length)))) {
+      if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this.shape.length)))){
+        this.posx = mX;
+        this.posy = mY;
+      }
+    }
   }
 
   /**
@@ -109,39 +114,24 @@ class Polyomino {
     let tetromino= random(0, 7);
     if (tetromino<1) {
       return [[0, color('cyan'),             0    ],
-      [color('cyan'),color('cyan'), color('cyan') ],
-      [0,                0,                   0   ],
-      [0     ,           0,             0 ]
+      [color('cyan'),color('cyan'), color('cyan') ]
      ];
     } else if (tetromino<2) {
-      return [[0, 0,    0, 0,         0    ],
-      [0, 0,    0, 0,         0   ],
-      [0, 0,    0, 0,         0   ],
-      [color('cyan'),color('cyan'), color('cyan'),color('cyan'),color('cyan')]
+      return [[color('cyan'),color('cyan'), color('cyan'),color('cyan'),color('cyan')]
      ];
     } else if (tetromino<3) {
-      return [[0, 0,             0    ],
-      [0,             0,      0],
-      [color('cyan'),color('cyan'), color('cyan')   ],
-      [0,         0,      0]
-     ];
+      return [[color('cyan'),color('cyan'), color('cyan') ]];
     } else if (tetromino<4) {
-      return [[0, 0,             0    ],
-      [0,            0,            0],
-      [0,             color('#770811'), 0   ],
-      [0,           0,            0 ]
-     ];
+      return [[  color('#770811')]];
     } else if (tetromino<5) {
       return [[color('cyan'), color('#770811'),             0    ],
-      [color('#770811'),             0,            0 ],
-      [0,            0, 0   ],
-      [0,           0,           0 ]
+      [color('#770811'),             0,            0 ]
      ];
     } else if (tetromino<6) {
       return [[color('cyan'), color('#770811'),   color('#770811' ) ],
-      [0,           0,   color('#770811' ) ],
-      [0,         0, color('#770811' )   ],
-      ['g',        0,        color('#770811' )]
+      [0,           0,   color('#770811' )],
+      [0,           0,   color('#770811' )],
+      [0,           0,   color('#770811' )]
      ];
     } else {
       return [[color('cyan'), color('#770811'),   color('#770811' )  ],
