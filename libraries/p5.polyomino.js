@@ -1,9 +1,14 @@
 class Polyomino {
   /**
+   * 
    * @param {Array} shape[rowIndex][columnIndex]
+   * 
    */
   constructor(shape) {
     this._shape = shape;
+    this.posx = 30;
+    this.posy = 30;
+    this.longitud = 20;
   }
 
   set shape(shape) {
@@ -28,6 +33,14 @@ class Polyomino {
     // credit goes to Nitin Jadhav: https://github.com/nitinja
     // who wrote about it here: https://stackoverflow.com/questions/15170942/how-to-rotate-a-matrix-in-an-array-in-javascript/58668351#58668351
     this._shape = this._shape[0].map((v, index) => this._shape.map(row => row[index]).reverse());
+  }
+  move_p(mX,mY){
+    if (mX >= ((this.posx)-(this.longitud*2))  &&  mX <= ((this.posx)+(this.longitud*(this.shape[0].length)))) {
+      if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this.shape.length)))){
+        this.posx = mX;
+        this.posy = mY;
+      }
+    }
   }
 
   /**
@@ -76,7 +89,7 @@ class Polyomino {
 
   p5.prototype.drawPolyomino = function (polyomino, row, col, LENGTH = 10, outlineWeight = 2, outline = 'magenta') {
     push();
-    translate(row * LENGTH, col * LENGTH);
+    translate(polyomino.posx,polyomino.posy);
     stroke(outline);
     strokeWeight(outlineWeight);
     for (let i = 0; i < polyomino.shape.length; i++) {
@@ -97,5 +110,55 @@ class Polyomino {
       }
     }
     pop();
+  }
+
+  p5.prototype.elegir_p= function(){
+    let tetromino= random(0, 10);
+    if (tetromino<1) {
+      return [[0, color('cyan'),             0    ],
+      [color('cyan'),color('cyan'), color('cyan') ]
+     ];
+    } else if (tetromino<2) {
+      return [[color('cyan'),color('cyan'), color('cyan'),color('cyan'),color('cyan')]
+     ];
+    } else if (tetromino<3) {
+      return [[color('cyan'),color('cyan'), color('cyan') ]];
+    } else if (tetromino<4) {
+      return [[  color('#770811')]];
+    } else if (tetromino<5) {
+      return [[color('cyan'), color('#770811')  ],
+      [color('#770811'),             0 ]
+     ];
+    } else if (tetromino<6) {
+      return [[color('cyan'), color('#770811'),   color('#770811' ) ],
+      [0,           0,   color('#770811' )],
+      [0,           0,   color('#770811' )],
+      [0,           0,   color('#770811' )]
+     ];
+    } else if (tetromino<7) {
+      return [[color('cyan'), 0,   0 ],
+      [color('#770811' ),         color('#770811' ),   color('#770811' )],
+     ];
+    } else if (tetromino<8) {
+      return[[ color('#770811' ) ],
+            [   color('#770811' )],
+            [   color('#770811' )],
+            [  color('#770811' )]
+     ];
+    } else if (tetromino<9) {
+      return [[color('cyan'), color('#770811') ],
+      [color('cyan'), color('#770811') ]
+     ];
+    } else if (tetromino<10) {
+      return [[color('cyan'), 0,   0  ],
+      [color('cyan'), color('#770811'),0 ],
+      [0, color('#770811'),   color('#770811' )],
+     ];
+    } else {
+      return [[color('cyan'), color('#770811'),   color('#770811' )  ],
+      [color('cyan'), color('#770811'),   color('#770811' ) ],
+      [color('cyan'), color('#770811'),   color('#770811' )],
+     ];
+    }
   }
 })();
