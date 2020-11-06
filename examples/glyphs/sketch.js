@@ -14,7 +14,7 @@ function setup() {
 
 function draw() {
   background('#060621');
-  drawPolyomino(polyomino, 2, 4, LENGTH, 2, 'black');
+  polyomino.dibujar_p();
   //drawPolyomino(polyomino2, 2, 4, LENGTH, 2, 'black');
   //drawPolyomino(polyomino3, 2, 4, LENGTH, 2, 'black');
 }

@@ -4,11 +4,11 @@ class Poliomino {
    * @param {number} py pocision y
    * @param {number} longitud tamano de cada cuadrado
    */
-  constructor(px,py,longitud) {
+  constructor() {
     this._shape = this.elegir_p();
-    this.posx = px;
-    this.posy = py;
-    this.longitud = longitud;
+    this.posx = 30;
+    this.posy = 30;
+    this.longitud = 20;
   }
 
   reflect() {
@@ -19,8 +19,8 @@ class Poliomino {
    * @param {number} mY nueva pocision y
    */
   mover_p(mX,mY){
-    if (mX >= (this.posx-(this.longitud*0.5*(this.shape[0].length)))  &&  mX <= (this.posx+(this.longitud*0.5*(this.shape[0].length)))) {
-      if (mY >= ((this.posy)-(this.longitud*0.5*(this.shape.length)))  &&  mY <= ((this.posx)+(this.longitud*0.5*(this.shape.length)))){
+    if (mX >= (this.posx-(this.longitud*0.5*(this._shape[0].length)))  &&  mX <= (this.posx+(this.longitud*0.5*(this._shape[0].length)))) {
+      if (mY >= ((this.posy)-(this.longitud*0.5*(this._shape.length)))  &&  mY <= ((this.posx)+(this.longitud*0.5*(this._shape.length)))){
         this.posx = mX;
         this.posy = mY;
       }
@@ -78,21 +78,23 @@ class Poliomino {
      ];
     }
   }
-  drawPolyomino(){
-    push();
-    translate(this.posx-((this.shape[0].length*this.longitud)/2),this.posy-((this.shape.length*this.longitud)/2));
-    stroke('black');
-    strokeWeight(3);
-    for (let i = 0; i < this.shape.length; i++) {
-      for (let j = 0; j < this.shape[i].length; j++) {
+  dibujar_p()  {
+    var c =  document.getElementById(  "myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.lineWidth = "1";
+    ctx.strokeStyle = "#52568E";
+    ctx.beginPath();
+    ctx.moveTo(this.posx-((this._shape[0].length*this.longitud)/2),this.posy-((this._shape.length*this.longitud)/2));
+    for (var i = 0; i < this._shape.length; i++) {
+      for (var j = 0; j < this._shape[i].length; j++) {
         // handles both zero and empty (undefined) entries as well
-        if (this.shape[i][j]) {
-          push();
-          if (this.shape[i][j] instanceof p5.Color) {
-            fill(this.shape[i][j]);
-            rect(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
+        if (this._shape[i][j]) {
+          if (this._shape[i][j] != 0) {
+            ctx.rect(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
+            ctx.stroke();
+            ctx.fillStyle = this._shape[i][j];
+            ctx.fill();
           }
-          pop();
         }
       }
     }

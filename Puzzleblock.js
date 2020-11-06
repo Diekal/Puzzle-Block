@@ -3,8 +3,8 @@ var PrimerMarco;
 var SegundoMarco; 
 var TercerMarco;
 var CuartoMarco;
-var polyomino;
-var tablero
+var poliomino;
+var tablero;
 //var polyomino2;
 //var polyomino3;
 
@@ -15,7 +15,7 @@ function setup() {
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 100, 150, 2);
     tablero = new Tablero(12, 12);
-    polyomino = new Poliomino(25,25,LENGTH);
+    poliomino = new Poliomino(50,50,LENGTH);
     //polyomino2 = createPolyomino(elegir_p(),100,100);
     //polyomino3 = createPolyomino(elegir_p(),200,200);
 }
@@ -31,13 +31,13 @@ function draw() {
     tablero.dibujarTablero();
     tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
-    polyomino.drawPolyomino();
+    poliomino.dibujar_p();
 }
 
 function mouseDragged() {
-    polyomino.move_p(mouseX,mouseY);
+    poliomino.move_p(mouseX,mouseY);
 }
 // no entendi para que es esta funcion pero pues estaba en la plantilla
-function debugPolyomino(polyomino) {
-    console.log(polyomino.shape);
+function debugPolyomino(poliomino) {
+    console.log(poliomino.shape);
 }

@@ -62,8 +62,8 @@ class Polyomino {
             [  color('#660066' )]
      ];
     } else if (tetromino<9) {
-      return [[color('#FF6600'), color('FF6600') ],
-      [color('FF6600'), color('FF6600') ]
+      return [[color('#FF6600'), color('#FF6600') ],
+      [color('#FF6600'), color('#FF6600') ]
      ];
     } else if (tetromino<10) {
       return [[color('#FF0099'), 0,   0  ],
@@ -86,13 +86,33 @@ class Polyomino {
     this._shape = this._shape[0].map((v, index) => this._shape.map(row => row[index]).reverse());
   }
   move_p(mX,mY){
-    if (mX >= ((this.posx)-(this.longitud*2))  &&  mX <= ((this.posx)+(this.longitud*(this.shape[0].length)))) {
-      if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this.shape.length)))){
+    if (mX >= ((this.posx)-(this.longitud*2))  &&  mX <= ((this.posx)+(this.longitud*(this._shape[0].length)))) {
+      if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this._shape.length)))){
         this.posx = mX;
         this.posy = mY;
       }
     }
   }
+
+  dibujar_p(){
+    push();
+    translate(this.posx-((this._shape[0].length*this.longitud)/2),this.posy-((this._shape.length*this.longitud)/2));
+    stroke('black');
+    strokeWeight(3);
+    for (let i = 0; i < this._shape.length; i++) {
+      for (let j = 0; j < this._shape[i].length; j++) {
+        // handles both zero and empty (undefined) entries as well
+        if (this._shape[i][j]) {
+          push();
+          if (this._shape[i][j] != 0) {
+            fill(this._shape[i][j]);
+            rect(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
+          }
+          pop();
+        }
+      }
+    }
+  } 
 
   /**
    * @param {Array} memory2D buffer[rows][cols] where empty cells are filled with 0
