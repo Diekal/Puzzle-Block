@@ -11,15 +11,20 @@
     </canvas>
     <script>
         //dibujar();
-        var PrimerMarco = new MarcosCuadros(35, 50, 155, 520, 1);
+        var PrimerMarco = new MarcosCuadros(25, 50, 220, 550, 1);
         PrimerMarco.dibujar();
-        var SegundoMarco = new MarcosCuadros(240, 15, 630, 630, 1);
+        var SegundoMarco = new MarcosCuadros(280, 15, 635, 635, 1);
         SegundoMarco.dibujar();
-        var TercerMarco = new MarcosCuadros(920, 310, 200, 320, 1);
+        var TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
         TercerMarco.dibujar();
-        var CuartoMarco = new MarcosCuadros(1010, 150, 100, 140, 2)
+        var CuartoMarco = new MarcosCuadros(1050, 165, 100, 150, 2);
         CuartoMarco.dibujar();
-        EliminarColumnaFila();
+        var tablero = new Tablero(12, 12);
+        tablero.crearTablero();
+        tablero.dibujarTablero();
+        tablero.EliminarColumnaFila();
+        tablero.dibujarTablero();
+
     </script>
  </body>
 
