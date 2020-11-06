@@ -7,7 +7,7 @@ var polyomino;
 
 function setup() {
   createCanvas(700, 700);
-  polyomino = createPolyomino(elegir_p());
+  polyomino = new Polyomino();
   //polyomino2 = createPolyomino(elegir_p(),100,100);
   //polyomino3 = createPolyomino(elegir_p(),200,200);
 }
