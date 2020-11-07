@@ -9,9 +9,13 @@ var tablero;
 //var polyomino3;
 
 function setup() {
+<<<<<<< HEAD
     createCanvas(1200, 660);
     //polyomino2 = createPolyomino(elegir_p(),100,100);
     //polyomino3 = createPolyomino(elegir_p(),200,200);
+=======
+    createCanvas(1200, 700);
+>>>>>>> c31fe5dbb2b66cda1b335b415365cb7a4272b56f
     PrimerMarco = new MarcosCuadros(25, 50, 220, 550, 1);
     SegundoMarco = new MarcosCuadros(280, 15, 635, 635, 1);
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
@@ -29,6 +33,10 @@ function draw() {
     TercerMarco.dibujar();
     CuartoMarco.dibujar();
     tablero.dibujarTablero();
+<<<<<<< HEAD
+=======
+    poliomino.dibujar_p();
+>>>>>>> c31fe5dbb2b66cda1b335b415365cb7a4272b56f
     tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
     poliomino.dibujar_p();
