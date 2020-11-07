@@ -28,7 +28,7 @@ class Tablero {
                 ctx.fill();
             }
         }
-          }
+    }
     EliminarColumnaFila() {
         for (var iME = 11; iME >= 0; iME--) {
             var siEliminarFila = Boolean(true);

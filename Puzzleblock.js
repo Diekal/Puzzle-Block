@@ -15,23 +15,22 @@ function setup() {
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 100, 150, 2);
     tablero = new Tablero(12, 12);
-    poliomino = new Poliomino(50,50,LENGTH);
+    poliomino = new Poliomino();
+    tablero.crearTablero();
     //polyomino2 = createPolyomino(elegir_p(),100,100);
     //polyomino3 = createPolyomino(elegir_p(),200,200);
 }
 
 function draw() {
-    background('#060621');
     //dibujar();
     PrimerMarco.dibujar();
     SegundoMarco.dibujar();
     TercerMarco.dibujar();
     CuartoMarco.dibujar();
-    tablero.crearTablero();
-    tablero.dibujarTablero();
-    tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
     poliomino.dibujar_p();
+    tablero.EliminarColumnaFila();
+    tablero.dibujarTablero();
 }
 
 function mouseDragged() {
@@ -39,5 +38,5 @@ function mouseDragged() {
 }
 // no entendi para que es esta funcion pero pues estaba en la plantilla
 function debugPolyomino(poliomino) {
-    console.log(poliomino.shape);
+    console.log(poliomino._shape);
 }
