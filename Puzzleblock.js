@@ -15,7 +15,7 @@ function setup() {
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 100, 150, 2);
     tablero = new Tablero(12, 12);
-    poliomino = new Poliomino();
+    poliomino = new Poliomino(50,50,20);
     tablero.crearTablero();
     //polyomino2 = createPolyomino(elegir_p(),100,100);
     //polyomino3 = createPolyomino(elegir_p(),200,200);

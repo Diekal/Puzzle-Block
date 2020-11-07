@@ -1,9 +1,9 @@
 class Poliomino  {
-    constructor() {
+    constructor(px,py,long) {
         this._shape = this.elegir_p();
-        this.posx = 30;
-        this.posy = 30;
-        this.longitud = 20;
+        this.posx = px;
+        this.posy = py;
+        this.longitud = long;
     }  
     mover_p(mX,mY){
         if (mX >= (this.posx-(this.longitud*0.5*(this._shape[0].length)))  &&  mX <= (this.posx+(this.longitud*0.5*(this._shape[0].length)))) {
