@@ -1,52 +1,48 @@
 class Poliomino  {
-    constructor() {
+      /**
+   * @param {number} px posicion en x
+   * @param {number} py posicion en y
+   * @param {number} long logitud de cada 
+   */
+    constructor(px,py,long) {
         this._shape = this.elegir_p();
-        this.posx = 100;
-        this.posy = 100;
-        this.longitud = 20;
+        this.firstposx = px;
+        this.firstposy = py;
+        this.posx = px;
+        this.posy = py;
+        this.longitud = long;
     }  
-    mover_p(){
-        var detector = 0;
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-        cv.onmousedown = function(event) {
-            if (event.clientX >= (this.posx-(this.longitud*0.5*(this._shape[0].length)))  &&  event.clientX <= (this.posx+(this.longitud*0.5*(this._shape[0].length)))) {
-              if (event.clientY >= ((this.posy)-(this.longitud*0.5*(this._shape.length)))  && event.clientY <= ((this.posx)+(this.longitud*0.5*(this._shape.length)))){
-                detector = 1 ;
-              }
-            }
-        }
-        cv.onmousemove = function(event) {
-            if(detector==1){
-              this.posx = event.clientX;
-              this.posy = event.clientY;
-            } 
-        }
-        cv.onmouseup = function(evet) {
-            detector = 0;
+    move_p(mX,mY){
+        if (mX >= ((this.posx)-(this.longitud*2))  &&  mX <= ((this.posx)+(this.longitud*(this._shape[0].length)))) {
+          if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this._shape.length)))){
+            this.posx = mX;
+            this.posy = mY;
+          }
         }
     }
     dibujar_p()  {
-        var c = document.getElementById("myCanvas");
-        var ctx = c.getContext("2d");
-        ctx.beginPath();
-        ctx.lineWidth = "2";
-        ctx.strokeStyle = "black";
-        ctx.moveTo(this.posx-((this._shape[0].length*this.longitud)/2),this.posy-((this._shape.length*this.longitud)/2));
+        push();
+        stroke('black');
+        strokeWeight(3);
+        translate(this.posx-((this._shape[0].length*this.longitud)/2),this.posy-((this._shape.length*this.longitud)/2));
         for (var i = 0; i < this._shape.length; i++) {
             for (var j = 0; j < this._shape[i].length; j++) {
-                // handles both zero and empty (undefined) entries as well
                 if (this._shape[i][j]) {
                     if (this._shape[i][j] != 0) {
-                        ctx.fillStyle = this._shape[i][j];
-                        ctx.rect(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
-                        ctx.stroke();
-                        ctx.fill();
+                        fill(this._shape[i][j]);
+                        rect(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
                     }
                 }
             }  
         }
+        pop();
     }
+    traducir(){
+        
+    }
+   /**
+   * @returns { Array} 
+   */
     elegir_p(){
         let tetromino= random(0, 12);
         if (tetromino<1) {
@@ -95,4 +91,33 @@ class Poliomino  {
          ];
         }
     }
+    update(memory2D, x, y) {
+        let memoryHitCounter = 0;
+        // i. clone memory into buffer
+        let buffer = memory2D.map(arr => { return arr.slice(); });
+        // ii. fill in buffer with this polyomino
+        for (let i = 0; i < this._shape.length; i++) {
+          // (e1) Check if current polyomino cell is too far down
+          if (buffer[x + i] === undefined) {
+            throw new Error(`Too far down`);
+          }
+          for (let j = 0; j < this._shape[i].length; j++) {
+            // (e2) Check if current polyomino cell is too far right
+            if (buffer[x + i][y + j] === undefined) {
+              throw new Error(`Too far right`);
+            }
+            // write only polyomino squares covering (i,j)
+            if (this._shape[i][j]) {
+              // check if returned buffer overrides memory2D
+              if (buffer[x + i][y + j] !== 0) {
+                memoryHitCounter++;
+              }
+              buffer[x + i][y + j] = this._shape[i][j];
+            }
+          }
+        }
+        // iii. return buffer and memory hit counter
+        return { buffer, memoryHitCounter };
+    }
+
 }
