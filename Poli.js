@@ -1,18 +1,31 @@
 class Poliomino  {
-    constructor(px,py,long) {
+    constructor() {
         this._shape = this.elegir_p();
-        this.posx = px;
-        this.posy = py;
-        this.longitud = long;
+        this.posx = 100;
+        this.posy = 100;
+        this.longitud = 20;
     }  
-    mover_p(mX,mY){
-        if (mX >= (this.posx-(this.longitud*0.5*(this._shape[0].length)))  &&  mX <= (this.posx+(this.longitud*0.5*(this._shape[0].length)))) {
-          if (mY >= ((this.posy)-(this.longitud*0.5*(this._shape.length)))  &&  mY <= ((this.posx)+(this.longitud*0.5*(this._shape.length)))){
-            this.posx = mX;
-            this.posy = mY;
-          }
+    mover_p(){
+        var detector = 0;
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        cv.onmousedown = function(event) {
+            if (event.clientX >= (this.posx-(this.longitud*0.5*(this._shape[0].length)))  &&  event.clientX <= (this.posx+(this.longitud*0.5*(this._shape[0].length)))) {
+              if (event.clientY >= ((this.posy)-(this.longitud*0.5*(this._shape.length)))  && event.clientY <= ((this.posx)+(this.longitud*0.5*(this._shape.length)))){
+                detector = 1 ;
+              }
+            }
         }
-      }
+        cv.onmousemove = function(event) {
+            if(detector==1){
+              this.posx = event.clientX;
+              this.posy = event.clientY;
+            } 
+        }
+        cv.onmouseup = function(evet) {
+            detector = 0;
+        }
+    }
     dibujar_p()  {
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
@@ -25,18 +38,15 @@ class Poliomino  {
                 // handles both zero and empty (undefined) entries as well
                 if (this._shape[i][j]) {
                     if (this._shape[i][j] != 0) {
+                        ctx.fillStyle = this._shape[i][j];
                         ctx.rect(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
                         ctx.stroke();
-                        ctx.fillStyle = this._shape[i][j];
                         ctx.fill();
                     }
                 }
             }  
         }
     }
-   /**
-   * @returns { Array} 
-   */
     elegir_p(){
         let tetromino= random(0, 12);
         if (tetromino<1) {
@@ -85,33 +95,4 @@ class Poliomino  {
          ];
         }
     }
-    update(memory2D, x, y) {
-        let memoryHitCounter = 0;
-        // i. clone memory into buffer
-        let buffer = memory2D.map(arr => { return arr.slice(); });
-        // ii. fill in buffer with this polyomino
-        for (let i = 0; i < this._shape.length; i++) {
-          // (e1) Check if current polyomino cell is too far down
-          if (buffer[x + i] === undefined) {
-            throw new Error(`Too far down`);
-          }
-          for (let j = 0; j < this._shape[i].length; j++) {
-            // (e2) Check if current polyomino cell is too far right
-            if (buffer[x + i][y + j] === undefined) {
-              throw new Error(`Too far right`);
-            }
-            // write only polyomino squares covering (i,j)
-            if (this._shape[i][j]) {
-              // check if returned buffer overrides memory2D
-              if (buffer[x + i][y + j] !== 0) {
-                memoryHitCounter++;
-              }
-              buffer[x + i][y + j] = this._shape[i][j];
-            }
-          }
-        }
-        // iii. return buffer and memory hit counter
-        return { buffer, memoryHitCounter };
-    }
-
 }

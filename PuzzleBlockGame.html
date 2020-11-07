@@ -13,14 +13,29 @@
     <script type="text/javascript" src="Marcos.js"></script>
     <script type="text/javascript" src="Tablero.js"></script>
     <script type="text/javascript" src="Poli.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.js" integrity="sha512-KxzVm+IqxNNq0+SzT/zzd5PHxY4LPrN+v5gZJ6+JKqjeU3Cr4y/djAg5eNlKDWurn1SeKZpql/yeOMWblMSzOg==" crossorigin="anonymous"></script>
 
 </head>
 <body>
     <canvas id="myCanvas" width="1200" height="660" style="border:1px solid #d3d3d3;">
     </canvas>
-    <script src="Puzzleblock.js"></script>
+    <script >
+    PrimerMarco = new MarcosCuadros(25, 50, 220, 550, 1);
+    SegundoMarco = new MarcosCuadros(280, 15, 635, 635, 1);
+    TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
+    CuartoMarco = new MarcosCuadros(1050, 165, 100, 150, 2);
+    tablero = new Tablero(12, 12);
+    poliomino = new Poliomino();
+    tablero.crearTablero();
+    PrimerMarco.dibujar();
+    SegundoMarco.dibujar();
+    TercerMarco.dibujar();
+    CuartoMarco.dibujar();
+    tablero.dibujarTablero();
+    poliomino.dibujar_p();
+    poliomino.move_p();
+    tablero.EliminarColumnaFila();
+    tablero.dibujarTablero();
+    </script>
  </body>
 
 </html>
