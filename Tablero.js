@@ -32,7 +32,7 @@ class Tablero {
                 console.log(" " + tablero.TableroMemoria[i][j]);
             }
         }
-          }
+    }
     EliminarColumnaFila() {
         for (var iME = 11; iME >= 0; iME--) {
             var siEliminarFila = Boolean(true);

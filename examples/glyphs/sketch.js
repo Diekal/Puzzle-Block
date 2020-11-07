@@ -7,14 +7,14 @@ var polyomino;
 
 function setup() {
   createCanvas(700, 700);
-  polyomino = createPolyomino(elegir_p());
+  polyomino = new Polyomino();
   //polyomino2 = createPolyomino(elegir_p(),100,100);
   //polyomino3 = createPolyomino(elegir_p(),200,200);
 }
 
 function draw() {
   background('#060621');
-  drawPolyomino(polyomino, 2, 4, LENGTH, 2, 'black');
+  polyomino.dibujar_p();
   //drawPolyomino(polyomino2, 2, 4, LENGTH, 2, 'black');
   //drawPolyomino(polyomino3, 2, 4, LENGTH, 2, 'black');
 }
