@@ -1,5 +1,6 @@
 function setup() {
   createCanvas(1200, 700);
+  var poliomino = new Poliomino(25,25,20);
 }
 
 function draw() {
@@ -17,4 +18,9 @@ function draw() {
   tablero.dibujarTablero();
   tablero.EliminarColumnaFila();
   tablero.dibujarTablero();
+  poliomino.dibujar_p();
+}
+
+function mouseDragged() {
+  polyomino.move_p(mouseX,mouseY);
 }
