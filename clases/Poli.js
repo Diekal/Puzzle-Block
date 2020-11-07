@@ -37,9 +37,6 @@ class Poliomino  {
         }
         pop();
     }
-    traducir(){
-        
-    }
    /**
    * @returns { Array} 
    */
