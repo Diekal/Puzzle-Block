@@ -9,7 +9,7 @@ var tablero;
 //var polyomino3;
 
 function setup() {
-    //createCanvas(1200, 660);
+    createCanvas(1200, 700);
     PrimerMarco = new MarcosCuadros(25, 50, 220, 550, 1);
     SegundoMarco = new MarcosCuadros(280, 15, 635, 635, 1);
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
@@ -29,7 +29,6 @@ function draw() {
     CuartoMarco.dibujar();
     tablero.dibujarTablero();
     poliomino.dibujar_p();
-    poliomino.move_p();
     tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
 }
