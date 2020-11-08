@@ -11,19 +11,18 @@ class Poliomino  {
         this.posx = px;
         this.posy = py;
         this.longitud = long;
-        this.postablerox = null;
-        this.postableroy = null;
-    } 
+        this.jugada = 0;
+    }
    /**
    * @param {number} mX posicion en x
    * @param {number} mY posicion en y
    */ 
     move_p(mX,mY){
-        if (mX >= ((this.posx)-(this.longitud*2))  &&  mX <= ((this.posx)+(this.longitud*(this._shape[0].length)))) {
-          if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this._shape.length)))){
-            this.posx = mX;
-            this.posy = mY;
-          }
+        if (mX >= ((this.posx)-(this.longitud*2) ) &&  mX <= ((this.posx)+(this.longitud*(this._shape[0].length)))) {
+            if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this._shape[0].length)))){
+                this.posx = mX;
+                this.posy = mY;
+           }
         }
     }
     dibujar_p()  {
@@ -45,12 +44,12 @@ class Poliomino  {
    * @param { Array} tablero
    */
     dibujar_sombra(tablero){
-        var accion = 0;
+        this.jugada  = 0;
         for(let i=0;i<=(12-this._shape.length); i++){
             for(let j=0;j<=(12-this._shape[0].length); j++){
                 if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
                     if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
-                        accion = 1;
+                        this.jugada = 1;
                         push();
                         stroke('black');
                         strokeWeight(3);
@@ -61,18 +60,17 @@ class Poliomino  {
                                         fill("#99CCFF");
                                         rect(f * 48, g * 48, 48, 48);
                                         if(tablero[j+f][i+g]!="#292B4A"){
-                                            accion = 0;
+                                            this.jugada  = 0;
                                         }
                                     }
                             }  
                          }
                         pop();
-                        return accion; 
+                        break; 
                     }
                 }
             }
         }
-        return accion;
     }
     /**
    * @param { Array} tablero
@@ -133,8 +131,8 @@ class Poliomino  {
                 [  color('#660066' )]
          ];
         } else if (tetromino<9) {
-            return [[color('#FF6600'), color('FF6600') ],
-            [color('FF6600'), color('FF6600') ]
+            return [[color('#FF6600'), color('#FF6600') ],
+            [color('#FF6600'), color('#FF6600') ]
              ];
         } else if (tetromino<10) {
             return [[color('#FF0099'), 0,   0  ],
