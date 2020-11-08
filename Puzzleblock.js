@@ -42,7 +42,7 @@ function draw() {
     textSize(35);
     textFont('STCaiyun');
     text("Score", 1010, 100);
-    text(score, 1035, 140);
+    text(score, 1025, 140);
     text("Lineas", 1010, 190);
     text(FilasCompletas, 1035, 230);
     if (bomba.tiempo >= 20){
