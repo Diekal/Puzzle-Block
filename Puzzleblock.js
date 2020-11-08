@@ -6,7 +6,8 @@ var CuartoMarco;
 var poliomino;
 var poliomino2;
 var tablero;
-var Segundos;
+var Turnos = 0;
+
 //var polyomino2;
 //var polyomino3;
 
@@ -22,7 +23,8 @@ function setup() {
     poliomino = new Poliomino(65,65,48);
     poliomino2 = new Poliomino(65,65,48);
     tablero.crearTablero();
-    tablero.Bomba();
+    bomba = new Bombas();
+    tablero.TableroMemoria[bomba.Cols][bomba.Fil] = "💣";
 }
 
 function draw() {
@@ -36,12 +38,19 @@ function draw() {
     tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
     poliomino.dibujar_p();
+    if (bomba.tiempo >= 20){
+        textSize(35);
+        text("Perdiste", 990, 600);
+    }
+
 }
+
 
 function mouseDragged() {
     poliomino.move_p(mouseX,mouseY);
   }
 function mouseReleased(){
+
 }
 // no entendi para que es esta funcion pero pues estaba en la plantilla
 function debugPolyomino(poliomino) {
