@@ -80,3 +80,8 @@ Tiene adicionalmente el metodo dibujar_sombra la cual dibuja una sombra de color
   ```
   Y por ultimo esta el metodo elegir_p que escoge cual figura se va a dibujar.
 ## Class Bombas
+El proposito de las bombas es que se ponen en un lugar alzar en el tablero y usuario tiene que eliminarlas antes que exploteno sino pierde.
+## Attributos
+Tiempo:Es el tiempo que ha transcurrida desde que se creo la bomba en segundos.
+Cols: Es un numero alzar del 0 al 11 luego este numero sera la columna en la que va aparecer la bomba.
+Fil: Es un numero alazar del 0 al 11 que sera la fila.
