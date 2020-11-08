@@ -11,11 +11,7 @@ class Poliomino  {
         this.posx = px;
         this.posy = py;
         this.longitud = long;
-    } 
-          /**
-   * @param {number} mX posicion en x
-   * @param {number} mY posicion en y
-   */ 
+    }  
     move_p(mX,mY){
         if (mX >= ((this.posx)-(this.longitud*2))  &&  mX <= ((this.posx)+(this.longitud*(this._shape[0].length)))) {
           if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this._shape.length)))){

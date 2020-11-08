@@ -22,14 +22,8 @@ class Tablero {
                 }
                 else {
                     textSize(32);
-                    text(this.TableroMemoria[co][f], 50, 50);
+                    text(this.TableroMemoria[co][f], 310 + (co * 48), 45 + (f * 48));
                 }
-            }
-        }
-        for (var i in tablero.TableroMemoria) {
-            console.log("row " + i);
-            for (var j in tablero.TableroMemoria[i]) {
-                console.log(" " + tablero.TableroMemoria[i][j]);
             }
         }
           }
@@ -69,7 +63,13 @@ class Tablero {
       
     }
     Colisiones(){
-        
+
+    }
+    Bomba(){
+        var Cols = int(random(12));
+        var Fil = int(random(12)); 
+        tablero.TableroMemoria[Cols][Fil] = "💣";
+        tablero.dibujarTablero();
     }
 
 }
