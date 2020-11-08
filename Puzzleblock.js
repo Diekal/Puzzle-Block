@@ -21,12 +21,13 @@ function setup() {
     tablero = new Tablero(12, 12);
     poliomino = new Poliomino(65,65,48);
     poliomino2 = new Poliomino(65,65,48);
+    tablero.crearTablero();
+    tablero.Bomba();
 }
 
 function draw() {
     //dibujar();
     background(255);
-    tablero.crearTablero();
     PrimerMarco.dibujar();
     SegundoMarco.dibujar();
     TercerMarco.dibujar();
@@ -35,11 +36,6 @@ function draw() {
     tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
     poliomino.dibujar_p();
-    if ((millis() - Segundos) >= 20){
-        tablero.Bomba();
-        Segundos = millis();
-        console.log("Funciona")
-    }
 }
 
 function mouseDragged() {
