@@ -41,6 +41,33 @@ class Poliomino  {
         }
         pop();
     }
+    dibujar_jugada(){
+        for(let i=0;i<12; i++){
+            for(let j=0;j<12; j++){
+                if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
+                    if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
+                        push();
+                        stroke('black');
+                        strokeWeight(3);
+                        translate(310 + (j * 48),45 + (i * 48));
+                        for (var g = 0; g < this._shape.length; g++) {
+                            for (var f = 0; f < this._shape[g].length; f++) {
+                                if (this._shape[g][f]) {
+                                    if (this._shape[g][f] != 0) {
+                                        fill("#99CCFF");
+                                        rect(f * 48, g * 48, 48, 48);
+                                    }
+                                }
+                            }  
+                         }
+                        pop();
+                         
+                    }
+                    break;
+                }
+            }
+        }
+    } 
    /**
    * @returns { Array} 
    */

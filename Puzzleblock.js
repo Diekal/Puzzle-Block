@@ -17,7 +17,7 @@ function setup() {
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 200, 250, 2);
     tablero = new Tablero(12, 12);
-    poliomino = new Poliomino(65,65,45);
+    poliomino = new Poliomino(65,65,30);
 }
 
 function draw() {
@@ -31,6 +31,7 @@ function draw() {
     tablero.dibujarTablero();
     tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
+    poliomino.dibujar_jugada();
     poliomino.dibujar_p();
 }
 
