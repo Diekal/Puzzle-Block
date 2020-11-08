@@ -1,4 +1,3 @@
-const LENGTH = 20;
 var PrimerMarco;
 var SegundoMarco; 
 var TercerMarco;
@@ -7,6 +6,7 @@ var poliomino;
 var poliomino2;
 var tablero;
 var Turnos = 0;
+var jugada_valida=Boolean(false);
 
 //var polyomino2;
 //var polyomino3;
@@ -36,7 +36,7 @@ function draw() {
     tablero.dibujarTablero();
     tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
-    poliomino.dibujar_jugada();
+    jugada_valida=poliomino.dibujar_sombra(tablero.TableroMemoria);
     poliomino.dibujar_p();
     if (bomba.tiempo >= 20){
         textSize(35);
@@ -48,9 +48,14 @@ function draw() {
 
 function mouseDragged() {
     poliomino.move_p(mouseX,mouseY);
-  }
+    return false;
+}
 function mouseReleased(){
-
+    if (jugada_valida==false ){
+        poliomino.posx=poliomino.firstposx;
+        poliomino.posy=poliomino.firstposy;
+    }
+    return false;
 }
 // no entendi para que es esta funcion pero pues estaba en la plantilla
 function debugPolyomino(poliomino) {

@@ -31,45 +31,48 @@ class Poliomino  {
         translate(this.posx-((this._shape[0].length*this.longitud)/2),this.posy-((this._shape.length*this.longitud)/2));
         for (var i = 0; i < this._shape.length; i++) {
             for (var j = 0; j < this._shape[i].length; j++) {
-                if (this._shape[i][j]) {
-                    if (this._shape[i][j] != 0) {
-                        fill(this._shape[i][j]);
-                        rect(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
-                    }
+                if (this._shape[i][j] != 0) {
+                    fill(this._shape[i][j]);
+                    rect(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
                 }
             }  
         }
         pop();
     }
-    dibujar_jugada(){
-        for(let i=0;i<12; i++){
-            for(let j=0;j<12; j++){
+    /**
+   * @param { Array} tablero
+   */
+    dibujar_sombra(tablero){
+        var accion = Boolean(false);
+        for(let i=0;i<=(12-this._shape.length); i++){
+            for(let j=0;j<=(12-this._shape[0].length); j++){
                 if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
                     if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
+                        accion=true;
                         push();
                         stroke('black');
                         strokeWeight(3);
                         translate(310 + (j * 48),45 + (i * 48));
                         for (var g = 0; g < this._shape.length; g++) {
                             for (var f = 0; f < this._shape[g].length; f++) {
-                                if (this._shape[g][f]) {
                                     if (this._shape[g][f] != 0) {
                                         fill("#99CCFF");
                                         rect(f * 48, g * 48, 48, 48);
+                                        if(tablero[j+f][i+g]!="#292B4A"){
+                                            accion=false;
+                                        }
                                     }
-                                }
                             }  
                          }
                         pop();
-                         
+                        return accion; 
                     }
-                    break;
                 }
             }
         }
-    } 
+    }
    /**
-   * @returns { Array} 
+   * @returns {Array} 
    */
     elegir_p(){
         let tetromino= random(0, 12);
@@ -119,33 +122,4 @@ class Poliomino  {
          ];
         }
     }
-    update(memory2D, x, y) {
-        let memoryHitCounter = 0;
-        // i. clone memory into buffer
-        let buffer = memory2D.map(arr => { return arr.slice(); });
-        // ii. fill in buffer with this polyomino
-        for (let i = 0; i < this._shape.length; i++) {
-          // (e1) Check if current polyomino cell is too far down
-          if (buffer[x + i] === undefined) {
-            throw new Error(`Too far down`);
-          }
-          for (let j = 0; j < this._shape[i].length; j++) {
-            // (e2) Check if current polyomino cell is too far right
-            if (buffer[x + i][y + j] === undefined) {
-              throw new Error(`Too far right`);
-            }
-            // write only polyomino squares covering (i,j)
-            if (this._shape[i][j]) {
-              // check if returned buffer overrides memory2D
-              if (buffer[x + i][y + j] !== 0) {
-                memoryHitCounter++;
-              }
-              buffer[x + i][y + j] = this._shape[i][j];
-            }
-          }
-        }
-        // iii. return buffer and memory hit counter
-        return { buffer, memoryHitCounter };
-    }
-
 }
