@@ -6,7 +6,7 @@ var poliomino;
 var poliomino2;
 var poliomino3;
 var tablero;
-var Turnos = 0;
+var Turnos = 1;
 var jugada_valida;
 var jugada_valida2;
 var jugada_valida3;
@@ -27,7 +27,7 @@ function setup() {
     poliomino3 = new Poliomino(135,450,30);
     tablero.crearTablero();
     bomba = new Bombas();
-    tablero.TableroMemoria[bomba.Cols][bomba.Fil] = "💣";
+    bomba.crearBomba();
 }
 
 function draw() {
@@ -51,7 +51,12 @@ function draw() {
     text("Score", 1010, 100);
     text(score, 1025, 140);
     text("Lineas", 1010, 190);
-    text(FilasCompletas, 1035, 230);
+    text(FilasCompletas, 1035, 230);   
+     if (Turnos % 5 == 0 ){
+        bomba = new Bombas();
+        bomba.crearBomba();
+        Turnos = 1;
+    }
     if (bomba.tiempo >= 20){
         text("Perdiste", 990, 600);
     }
@@ -74,6 +79,7 @@ function mouseReleased(){
     }else{
         tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria);
         poliomino = new Poliomino(135,150,30);
+        Turnos += 1;
     }
     if (jugada_valida2==0 ){
         poliomino2.posx=poliomino2.firstposx;
@@ -81,6 +87,7 @@ function mouseReleased(){
     }else{
         tablero.TableroMemoria=poliomino2.guardar_tablero(tablero.TableroMemoria);
         poliomino2 = new Poliomino(135,300,30);
+        Turnos += 1;
     }
     if (jugada_valida3==0 ){
         poliomino3.posx=poliomino3.firstposx;
@@ -88,6 +95,7 @@ function mouseReleased(){
     }else{
         tablero.TableroMemoria=poliomino3.guardar_tablero(tablero.TableroMemoria);
         poliomino3 = new Poliomino(135,450,30);
+        Turnos += 1;
     }
     return false;
 }
