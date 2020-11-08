@@ -1,13 +1,13 @@
 # Puzzle-Block
-El juego consiste en poner fichas o poliominos de diferentes tamaños en un tablero con el fin de poder eliminar la mayor cantidad de filas y columnas posibles.Para esto se tienen 4 clases. Las principales siendo la clase tablero y la clase poliomino.
+El juego consiste en poner fichas o polinomios de diferentes tamaños en un tablero con el fin de poder eliminar la mayor cantidad de filas y columnas posibles.Para esto se tienen 4 clases. Las principales siendo la clase tablero y la clase poliomino.
 ## Class Tablero
-### Attributos:
+### Atributos:
 Columna:Indica la cantidad de columnas que va a tener el tablero.
 Fila: Es el numero de filas
-TableroEnMemoria:Es una matriz de colores donde se guarda la ubicacion de los tetrominos en memoria.
-### Metodos:
-La clase tablero tiene tres metodos:
-El metodo crear tablero que crear una matriz de el tamaño de las filas y columnas toda formada por el color azul oscuro que indica un espacio libre.
+TableroEnMemoria:Es una matriz de colores donde se guarda la ubicacion de los polinomios en memoria.
+### Métodos:
+La clase tablero tiene tres métodos:
+El método crear tablero que crear una matriz de el tamaño de las filas y columnas toda formada por el color azul oscuro que indica un espacio libre.
 ```
 crearTablero() {
         for (var x = 0; x < this.fila; x++) {
@@ -16,7 +16,7 @@ crearTablero() {
                 this.TableroMemoria[x][j] = "#292B4A";}
         }
 ```
-El metodo dibujarTablero que dibuja los cuadrados de la matriz dependiendo del color o figura en TableroMemoria que le corresponde a esa celda
+El método dibujarTablero que dibuja los cuadrados de la matriz dependiendo del color o figura en TableroMemoria que le corresponde a esa celda
  ```
  dibujarTablero() {
         for (var co = 0; co < this.columna; co++) {
@@ -35,18 +35,18 @@ El metodo dibujarTablero que dibuja los cuadrados de la matriz dependiendo del c
         }
     }
  ```
-Y el metodo EliminarFilasColumnas que elimina tanto las filas como las columnas cuando estan ocupadas es decir cuando en la matriz de memoria esa fila o columna tiene todos sus valores diferentes al azul oscuro. 
+Y el método EliminarFilasColumnas que elimina tanto las filas como las columnas cuando están ocupadas es decir cuando en la matriz de memoria esa fila o columna tiene todos sus valores diferentes al azul oscuro. 
 ## Class Poliomino
-### Attributos:
-shape : Es la figura o el poliomino que se va a dibujar.
-firstposx: Es la primera posicion en x.
-firstposy:Es la primera posicion en y.
-posx:posicion en x actual.
-posy: posicion en y actual.
+### Atributos:
+shape : Es la figura o el polinomio que se va a dibujar.
+firstposx: Es la primera posición en x.
+firstposy:Es la primera posición en y.
+posx:posición en x actual.
+posy: posición en y actual.
 longitud: tamaño del los cuadrados que forman la figura.
-### Metodos:
-La clase polinomio tiene el metodo de mover_p la cual mueve el poliomino. Ademas tiene el metodo dibujar_p que dibuja el poliomino de acuerdo a su posición en x y y.
-Tiene adicionalmente el metodo dibujar_sombra la cual dibuja una sombra de color azul claro cuando se arrastra la figura sobre el tablero e indica donde se va ha ubicar la ficha en el tablero.
+### Métodos:
+La clase polinomio tiene el método de mover_p la cual mueve el poliomino. Ademas tiene el método dibujar_p que dibuja el poliomino de acuerdo a su posición en x y y.
+Tiene adicionalmente el método dibujar_sombra la cual dibuja una sombra de color azul claro cuando se arrastra la figura sobre el tablero e indica donde se va ha ubicar la ficha en el tablero.
  ```
  dibujar_sombra(tablero){
         var accion = Boolean(false);
@@ -78,10 +78,10 @@ Tiene adicionalmente el metodo dibujar_sombra la cual dibuja una sombra de color
         }
     }
   ```
-  Y por ultimo esta el metodo elegir_p que escoge cual figura se va a dibujar.
+  Y por ultimo esta el método elegir_p que escoge cual figura se va a dibujar.
 ## Class Bombas
-El proposito de las bombas es que se ponen en un lugar alzar en el tablero y usuario tiene que eliminarlas antes que exploteno sino pierde.
-## Attributos
+El propósito de las bombas es que se ponen en un lugar alzar en el tablero y usuario tiene que eliminarlas antes que exploten o sino pierde.
+## Atributos
 Tiempo:Es el tiempo que ha transcurrida desde que se creo la bomba en segundos.
 Cols: Es un numero alzar del 0 al 11 luego este numero sera la columna en la que va aparecer la bomba.
 Fil: Es un numero alazar del 0 al 11 que sera la fila.
