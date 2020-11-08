@@ -12,7 +12,6 @@ class Tablero {
         }
     }
     dibujarTablero() {
-        strokeWeight(3);
         for (var co = 0; co < this.columna; co++) {
             for (var f = 0; f < this.fila; f++) {
                 if (this.TableroMemoria[co][f] != "💣") {
@@ -45,7 +44,7 @@ class Tablero {
                 FilasCompletas += 1;
             }
         }
-        for (var iME = 11; iME > 0; iME--) {
+        for (var iME = 11; iME >= 0; iME--) {
             var siEliminarColumna = Boolean(true);
             for (var jME = 0; jME < 12; jME++) {
                 if (this.TableroMemoria[jME][iME] == "#292B4A") {
@@ -63,14 +62,4 @@ class Tablero {
         }
       
     }
-    Colisiones(){
-
-    }
-    Bomba(){
-        var Cols = int(random(12));
-        var Fil = int(random(12)); 
-        tablero.TableroMemoria[Cols][Fil] = "💣";
-        tablero.dibujarTablero();
-    }
-
 }
