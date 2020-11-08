@@ -1,5 +1,3 @@
-var score;
-var FilasCompletas;
 class Tablero {
     constructor(columna, fila) {
         this.columna = columna;
@@ -22,7 +20,9 @@ class Tablero {
                 }
                 else {
                     textSize(32);
-                    text(this.TableroMemoria[co][f], 310 + (co * 48), 45 + (f * 48));
+                    fill("#70729E");
+                    rect(310 + (co * 48), 45 + (f * 48), 48, 48);
+                    text(this.TableroMemoria[co][f], 306 + (co * 50), 70 + (f * 50));
                 }
             }
         }

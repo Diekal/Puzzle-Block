@@ -7,7 +7,8 @@ var poliomino2;
 var tablero;
 var Turnos = 0;
 var jugada_valida=Boolean(false);
-
+var score = 0;
+var FilasCompletas = 0;
 //var polyomino2;
 //var polyomino3;
 
@@ -38,8 +39,13 @@ function draw() {
     tablero.dibujarTablero();
     jugada_valida=poliomino.dibujar_sombra(tablero.TableroMemoria);
     poliomino.dibujar_p();
+    textSize(35);
+    textFont('STCaiyun');
+    text("Score", 1010, 100);
+    text(score, 1035, 140);
+    text("Lineas", 1010, 190);
+    text(FilasCompletas, 1035, 230);
     if (bomba.tiempo >= 20){
-        textSize(35);
         text("Perdiste", 990, 600);
     }
 
