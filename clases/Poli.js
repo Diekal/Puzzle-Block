@@ -86,6 +86,7 @@ class Poliomino  {
                             for (var f = 0; f < this._shape[g].length; f++) {
                                     if (this._shape[g][f] != 0) {
                                         tablero[j+f][i+g]=this._shape[g][f];
+                                        score +=10;
                                     }
                             }  
                         }
@@ -95,6 +96,7 @@ class Poliomino  {
             }
         }
     }
+
    /**
    * @returns {Array} 
    */
