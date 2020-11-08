@@ -6,7 +6,7 @@ var poliomino;
 var poliomino2;
 var tablero;
 var Turnos = 0;
-var jugada_valida=Boolean(false);
+var jugada_valida;
 var score = 0;
 var FilasCompletas = 0;
 //var polyomino2;
@@ -21,7 +21,7 @@ function setup() {
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 200, 250, 2);
     tablero = new Tablero(12, 12);
-    poliomino = new Poliomino(65,65,48);
+    poliomino = new Poliomino(100,100,48);
     tablero.crearTablero();
     bomba = new Bombas();
     tablero.TableroMemoria[bomba.Cols][bomba.Fil] = "💣";
@@ -57,9 +57,11 @@ function mouseDragged() {
     return false;
 }
 function mouseReleased(){
-    if (jugada_valida==false ){
+    if (jugada_valida==0 ){
         poliomino.posx=poliomino.firstposx;
         poliomino.posy=poliomino.firstposy;
+    }else{
+        tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria);
     }
     return false;
 }

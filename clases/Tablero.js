@@ -12,6 +12,7 @@ class Tablero {
         }
     }
     dibujarTablero() {
+        strokeWeight(3);
         for (var co = 0; co < this.columna; co++) {
             for (var f = 0; f < this.fila; f++) {
                 if (this.TableroMemoria[co][f] != "💣") {

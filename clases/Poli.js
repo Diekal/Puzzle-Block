@@ -11,6 +11,8 @@ class Poliomino  {
         this.posx = px;
         this.posy = py;
         this.longitud = long;
+        this.postablerox = null;
+        this.postableroy = null;
     } 
    /**
    * @param {number} mX posicion en x
@@ -43,12 +45,12 @@ class Poliomino  {
    * @param { Array} tablero
    */
     dibujar_sombra(tablero){
-        var accion = Boolean(false);
+        var accion = 0;
         for(let i=0;i<=(12-this._shape.length); i++){
             for(let j=0;j<=(12-this._shape[0].length); j++){
                 if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
                     if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
-                        accion=true;
+                        accion = 1;
                         push();
                         stroke('black');
                         strokeWeight(3);
@@ -59,13 +61,35 @@ class Poliomino  {
                                         fill("#99CCFF");
                                         rect(f * 48, g * 48, 48, 48);
                                         if(tablero[j+f][i+g]!="#292B4A"){
-                                            accion=false;
+                                            accion = 0;
                                         }
                                     }
                             }  
                          }
                         pop();
                         return accion; 
+                    }
+                }
+            }
+        }
+        return accion;
+    }
+    /**
+   * @param { Array} tablero
+   */
+    guardar_tablero(tablero){
+        for(let i=0;i<=(12-this._shape.length); i++){
+            for(let j=0;j<=(12-this._shape[0].length); j++){
+                if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
+                    if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
+                        for (var g = 0; g < this._shape.length; g++) {
+                            for (var f = 0; f < this._shape[g].length; f++) {
+                                    if (this._shape[g][f] != 0) {
+                                        tablero[j+f][i+g]=this._shape[g][f];
+                                    }
+                            }  
+                        }
+                        return tablero; 
                     }
                 }
             }
