@@ -64,7 +64,7 @@ class Poliomino  {
                                     if (this._shape[g][f] != 0) {
                                         fill("#99CCFF");
                                         rect(f * 48, g * 48, 48, 48);
-                                        if(tablero[j+f][i+g]!="#292B4A"){//revisa que esa casilla este vacia
+                                        if(tablero[j+f][i+g]!="#292B4A"){  //revisa que esa casilla este vacia
                                             this.jugada  = 0;
                                         }
                                     }

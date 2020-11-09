@@ -4,14 +4,14 @@ class Tablero {
         this.fila = fila;
         this.TableroMemoria = Array(this.columna);
     }
-    crearTablero() {
+    crearTablero() { // Crea un arreglo bidimensional de celdas del color "#292B4A" para tener un registro en memoria
         for (var x = 0; x < this.fila; x++) {
             this.TableroMemoria[x] = Array(this.fila);
             for (var j = 0; j < this.columna; j++) {
                 this.TableroMemoria[x][j] = "#292B4A";}
         }
     }
-    dibujarTablero() {
+    dibujarTablero() { //Dibuja el tablero de acuerdo al color o si es una bomba la figura 
         for (var co = 0; co < this.columna; co++) {
             for (var f = 0; f < this.fila; f++) {
                 if (this.TableroMemoria[co][f] != "💣") {
@@ -22,30 +22,32 @@ class Tablero {
                     textSize(32);
                     fill("#70729E");
                     rect(310 + (co * 48), 45 + (f * 48), 48, 48);
-                    text(this.TableroMemoria[co][f], 306 + (co * 50), 70 + (f * 50));
-                }
+                    text(this.TableroMemoria[co][f], 306 + (co * 50), 70 + (f * 50));}
             }
         }
     }
-    EliminarColumnaFila() {
+    EliminarColumnaFila() { 
         for (var iME = 11; iME >= 0; iME--) {
-            var siEliminarFila = Boolean(true);
+            var siEliminarFila = Boolean(true); //Es para indicar si una fila esta com´puesta de valores diferentes a "#292B4A" es decir si todas las celdas estan ocupadas.
             for (var jME = 0; jME < 12; jME++) {
                 if (this.TableroMemoria[iME][jME] == "#292B4A") {
-                    siEliminarFila = false;
-                }
+                    siEliminarFila = false;}
             }
             if (siEliminarFila) {
                 var k = iME;
                 for (var m = 0; m < 12; m++) {
+                    if (this.TableroMemoria[k][m] == "💣"){
+                        BombaEliminada = true;
+                    } 
                     this.TableroMemoria[k][m] = "#292B4A";
+
                 }
                 score += 50;
                 FilasCompletas += 1;
             }
         }
         for (var iME = 11; iME >= 0; iME--) {
-            var siEliminarColumna = Boolean(true);
+            var siEliminarColumna = Boolean(true); // Elimina Columnas.
             for (var jME = 0; jME < 12; jME++) {
                 if (this.TableroMemoria[jME][iME] == "#292B4A") {
                     siEliminarColumna = false;
