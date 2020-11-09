@@ -11,11 +11,7 @@ var Turnos = 1;
 var score = 0;
 var FilasCompletas = 0;
 var perder = Boolean(false);
-<<<<<<< HEAD
-
-=======
 var BombaEliminada = true;
->>>>>>> 4ef756a1b4efa866ff7bf1b808b55ba7c4a14fd6
 function setup() {
     //se define cada objeto
     createCanvas(1200, 660);
