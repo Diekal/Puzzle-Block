@@ -8,20 +8,10 @@ var poliomino2;
 var poliomino3;
 var tablero;
 var Turnos = 1;
-<<<<<<< HEAD
-var jugada_valida;
-var jugada_valida2;
-var jugada_valida3;
 var score = 0;
 var FilasCompletas = 0;
 var perder = Boolean(false);
-//var polyomino2;
-//var polyomino3;
-=======
-var score = 0;
-var FilasCompletas = 0;
->>>>>>> 28da8180b520777555c46cc1bd99d59d913d05d9
-
+var BombaEliminada = true;
 function setup() {
     //se define cada objeto
     createCanvas(1200, 660);
@@ -79,11 +69,7 @@ function draw() {
 
 }
 
-<<<<<<< HEAD
-
-=======
 // esta funcion detecta cuando se mantiene click y se mueve el mause para llamar a el metodo que da movimiento
->>>>>>> 28da8180b520777555c46cc1bd99d59d913d05d9
 function mouseDragged() {
     var MX=mouseX;
     var MY=mouseY;
