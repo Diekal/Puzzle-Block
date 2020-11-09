@@ -7,14 +7,7 @@ var poliomino;
 var poliomino2;
 var poliomino3;
 var tablero;
-<<<<<<< HEAD
 var Turnos = 1;
-var jugada_valida;
-var jugada_valida2;
-var jugada_valida3;
-=======
-var Turnos = 0;
->>>>>>> d6b7b7108465afcf95f1d5972e08a86bd3e6eac9
 var score = 0;
 var FilasCompletas = 0;
 
