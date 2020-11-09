@@ -8,19 +8,9 @@ var poliomino2;
 var poliomino3;
 var tablero;
 var Turnos = 1;
-<<<<<<< HEAD
-var jugada_valida;
-var jugada_valida2;
-var jugada_valida3;
 var score = 0;
 var FilasCompletas = 0;
 var perder = Boolean(false);
-//var polyomino2;
-//var polyomino3;
-=======
-var score = 0;
-var FilasCompletas = 0;
->>>>>>> 28da8180b520777555c46cc1bd99d59d913d05d9
 
 function setup() {
     //se define cada objeto
@@ -40,50 +30,45 @@ function setup() {
 
 function draw() {
     if (perder == false){
-    background(255);
-    PrimerMarco.dibujar();
-    SegundoMarco.dibujar();
-    TercerMarco.dibujar();
-    CuartoMarco.dibujar();
-    tablero.dibujarTablero();
-    tablero.EliminarColumnaFila();
-    tablero.dibujarTablero();
-    jugada_valida=poliomino.dibujar_sombra(tablero.TableroMemoria);
-    jugada_valida2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
-    jugada_valida3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
-    poliomino.dibujar_p();
-    poliomino2.dibujar_p();
-    poliomino3.dibujar_p();
-    //Se agrega el texto del puntaje y el avance
-    textSize(35);
-    textFont('STCaiyun');
-    text("Score", 1010, 100);
-    text(score, 1025, 140);
-    text("Lineas", 1010, 190);
-    text(FilasCompletas, 1035, 230);   
-     if (Turnos % 5 == 0 ){
-        bomba = new Bombas();
-        bomba.crearBomba();
+        background(255);
+        PrimerMarco.dibujar();
+        SegundoMarco.dibujar();
+        TercerMarco.dibujar();
+        CuartoMarco.dibujar();
+        tablero.dibujarTablero();
+        tablero.EliminarColumnaFila();
+        tablero.dibujarTablero();
+        jugada_valida=poliomino.dibujar_sombra(tablero.TableroMemoria);
+        jugada_valida2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
+        jugada_valida3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
+        poliomino.dibujar_p();
+        poliomino2.dibujar_p();
+        poliomino3.dibujar_p();
+        //Se agrega el texto del puntaje y el avance
+        textSize(35);
+        textFont('STCaiyun');
+        text("Score", 1010, 100);
+        text(score, 1025, 140);
+        text("Lineas", 1010, 190);
+        text(FilasCompletas, 1035, 230);   
+        if (Turnos % 5 == 0 ){
+            bomba = new Bombas();
+            bomba.crearBomba();
         Turnos =1;
+        }
+    }else{
+        background(0);
+        fill(255);
+        textSize(60);
+        textFont('STCaiyun');
+        text("Game", 500, 300);
+        text("Over", 500, 350);
     }
- }
-  else{
-    background(0);
-    fill(255);
-    textSize(60);
-    textFont('STCaiyun');
-    text("Game", 500, 300);
-    text("Over", 500, 350);
-  }
 
 
 }
 
-<<<<<<< HEAD
-
-=======
 // esta funcion detecta cuando se mantiene click y se mueve el mause para llamar a el metodo que da movimiento
->>>>>>> 28da8180b520777555c46cc1bd99d59d913d05d9
 function mouseDragged() {
     var MX=mouseX;
     var MY=mouseY;
@@ -96,7 +81,7 @@ function mouseDragged() {
 // dado que la jugada no sea valida, el poliomino recupera su posicion inicial
 // Por otro lado si la jugada es valida, guarda el poliomino en el tablero y vuelve a definir el poliomino para generar uno nuevo
 function mouseReleased(){
-    if (jugada_valida==0 ){
+    if (poliomino.jugada==0 ){
         poliomino.posx=poliomino.firstposx;
         poliomino.posy=poliomino.firstposy;
     }else{
@@ -104,7 +89,7 @@ function mouseReleased(){
         poliomino = new Poliomino(135,150,30);
         Turnos += 1;
     }
-    if (jugada_valida2==0 ){
+    if (poliomino2.jugada==0 ){
         poliomino2.posx=poliomino2.firstposx;
         poliomino2.posy=poliomino2.firstposy;
     }else{
@@ -112,7 +97,7 @@ function mouseReleased(){
         poliomino2 = new Poliomino(135,300,30);
         Turnos += 1;
     }
-    if (jugada_valida3==0 ){
+    if (poliomino3.jugada==0 ){
         poliomino3.posx=poliomino3.firstposx;
         poliomino3.posy=poliomino3.firstposy;
     }else{
