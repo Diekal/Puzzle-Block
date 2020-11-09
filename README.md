@@ -85,3 +85,7 @@ El propósito de las bombas es que se ponen en un lugar alzar en el tablero y us
 Tiempo:Es el tiempo que ha transcurrida desde que se creo la bomba en segundos.
 Cols: Es un numero alzar del 0 al 11 luego este numero sera la columna en la que va aparecer la bomba.
 Fil: Es un numero alazar del 0 al 11 que sera la fila.
+## Referencias .
+1. [Juego guia tomado como referencia.](https://play.google.com/store/apps/details?id=game.puzzle.blockpuzzle&hl=es)
+2. [Plantilla de p5 dado por el profesor.](https://github.com/objetos/p5.polyomino.js)
+3. [Referencia de p5.js.](https://p5js.org/es/reference/)
