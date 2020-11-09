@@ -1,3 +1,4 @@
+//Se declaran los objetos a usar
 var PrimerMarco;
 var SegundoMarco; 
 var TercerMarco;
@@ -9,10 +10,9 @@ var tablero;
 var Turnos = 0;
 var score = 0;
 var FilasCompletas = 0;
-//var polyomino2;
-//var polyomino3;
 
 function setup() {
+    //se define cada objeto
     createCanvas(1200, 660);
     PrimerMarco = new MarcosCuadros(25, 50, 220, 550, 1);
     SegundoMarco = new MarcosCuadros(280, 15, 635, 635, 1);
@@ -43,6 +43,7 @@ function draw() {
     poliomino.dibujar_p();
     poliomino2.dibujar_p();
     poliomino3.dibujar_p();
+    //Se agrega el texto del puntaje y el avance
     textSize(35);
     textFont('STCaiyun');
     text("Score", 1010, 100);
@@ -55,11 +56,15 @@ function draw() {
 
 }
 
+// esta funcion detecta cuando se mantiene click y se mueve el mause para llamar a el metodo que da movimiento
 function mouseDragged() {
     poliomino.move_p(mouseX,mouseY);
     poliomino2.move_p(mouseX,mouseY);
     poliomino3.move_p(mouseX,mouseY);
 }
+// Esta funcion se llama cuando se suleta un click
+// dado que la jugada no sea valida, el poliomino recupera su posicion inicial
+// Por otro lado si la jugada es valida, guarda el poliomino en el tablero y vuelve a definir el poliomino para generar uno nuevo
 function mouseReleased(){
     if (poliomino.jugada ==0 ){
         poliomino.posx=poliomino.firstposx;

@@ -4,6 +4,8 @@ class Poliomino  {
    * @param {number} py posicion en y
    * @param {number} long logitud de cada 
    */
+   //En el constructor se define la posicion del poliomino, su tamaño, su posicion inicial y 
+   //la variable jugada define si el movimiento realizado es valido.   
     constructor(px,py,long) {
         this._shape = this.elegir_p();
         this.firstposx = px;
@@ -17,14 +19,16 @@ class Poliomino  {
    * @param {number} mX posicion en x
    * @param {number} mY posicion en y
    */ 
+    //este metodo recibe la posicion del mouse y lee la pocicion del poliomino para permitir su movimiento
     move_p(mX,mY){
-        if (mX >= ((this.posx)-(this.longitud*2) ) &&  mX <= ((this.posx)+(this.longitud*(this._shape[0].length)))) {
-            if (mY >= ((this.posy)-(this.longitud*2))  &&  mY <= ((this.posx)+(this.longitud*(this._shape[0].length)))){
+        if (mX >= ((this.posx)-((this._shape[0].length*this.longitud)/2) ) &&  mX <= ((this.posx)+((this._shape[0].length*this.longitud)/2))) {
+            if (mY >= ((this.posy)-((this._shape.length*this.longitud)/2))  &&  mY <= ((this.posy)+((this._shape.length*this.longitud)/2))){
                 this.posx = mX;
                 this.posy = mY;
            }
         }
     }
+    //el metodo dibujar dibuja el poliomino leyendo la informacion de cada arreglo
     dibujar_p()  {
         push();
         stroke('black');
@@ -43,6 +47,7 @@ class Poliomino  {
     /**
    * @param { Array} tablero
    */
+    // tomando como informacion las pociciones del tablero este metodo dibuja la posibilidad de juego.
     dibujar_sombra(tablero){
         this.jugada  = 0;
         for(let i=0;i<=(12-this._shape.length); i++){
@@ -59,7 +64,7 @@ class Poliomino  {
                                     if (this._shape[g][f] != 0) {
                                         fill("#99CCFF");
                                         rect(f * 48, g * 48, 48, 48);
-                                        if(tablero[j+f][i+g]!="#292B4A"){
+                                        if(tablero[j+f][i+g]!="#292B4A"){//revisa que esa casilla este vacia
                                             this.jugada  = 0;
                                         }
                                     }
@@ -75,6 +80,7 @@ class Poliomino  {
     /**
    * @param { Array} tablero
    */
+    // este metodo es llamado cuando se suelta el click, si la jugada es valida guarda el poliomino en el tablero
     guardar_tablero(tablero){
         for(let i=0;i<=(12-this._shape.length); i++){
             for(let j=0;j<=(12-this._shape[0].length); j++){
@@ -97,8 +103,10 @@ class Poliomino  {
 
    /**
    * @returns {Array} 
-   */
-    elegir_p(){
+   */ 
+   // este metodo representa la memoria que guarda todos los posibles poliominos y lo selecciona de manera aleatoria
+   // cada poliomino es representado en un arreglo y cada espacio representa el color de cada cuadro del poliomino 
+   elegir_p(){
         let tetromino= random(0, 12);
         if (tetromino<1) {
             return [[0, color('cyan'),             0    ],
