@@ -6,16 +6,13 @@ var poliomino;
 var poliomino2;
 var poliomino3;
 var tablero;
-<<<<<<< HEAD
 var Turnos = 1;
 var jugada_valida;
 var jugada_valida2;
 var jugada_valida3;
-=======
-var Turnos = 0;
->>>>>>> d6b7b7108465afcf95f1d5972e08a86bd3e6eac9
 var score = 0;
 var FilasCompletas = 0;
+var perder = Boolean(false);
 //var polyomino2;
 //var polyomino3;
 
@@ -27,15 +24,15 @@ function setup() {
     CuartoMarco = new MarcosCuadros(1050, 165, 200, 250, 2);
     tablero = new Tablero(12, 12);
     poliomino = new Poliomino(135,150,30);
-    poliomino2 = new Poliomino(135,350,30);
-    poliomino3 = new Poliomino(135,500,30);
+    poliomino2 = new Poliomino(135,300,30);
+    poliomino3 = new Poliomino(135,450,30);
     tablero.crearTablero();
     bomba = new Bombas();
     bomba.crearBomba();
 }
 
 function draw() {
-
+    if (perder == false){
     background(255);
     PrimerMarco.dibujar();
     SegundoMarco.dibujar();
@@ -44,9 +41,9 @@ function draw() {
     tablero.dibujarTablero();
     tablero.EliminarColumnaFila();
     tablero.dibujarTablero();
-    poliomino.dibujar_sombra(tablero.TableroMemoria);
-    poliomino2.dibujar_sombra(tablero.TableroMemoria);
-    poliomino3.dibujar_sombra(tablero.TableroMemoria);
+    jugada_valida=poliomino.dibujar_sombra(tablero.TableroMemoria);
+    jugada_valida2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
+    jugada_valida3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
     poliomino.dibujar_p();
     poliomino2.dibujar_p();
     poliomino3.dibujar_p();
@@ -59,21 +56,32 @@ function draw() {
      if (Turnos % 5 == 0 ){
         bomba = new Bombas();
         bomba.crearBomba();
-        Turnos = 1;
+        Turnos =1;
     }
-    if (bomba.tiempo >= 20){
-        text("Perdiste", 990, 600);
-    }
+ }
+  else{
+    background(0);
+    fill(255);
+    textSize(60);
+    textFont('STCaiyun');
+    text("Game", 500, 300);
+    text("Over", 500, 350);
+  }
+
 
 }
+
 
 function mouseDragged() {
-    poliomino.move_p(mouseX,mouseY);
-    poliomino2.move_p(mouseX,mouseY);
-    poliomino3.move_p(mouseX,mouseY);
+    var MX=mouseX;
+    var MY=mouseY;
+    poliomino.move_p(MX,MY);
+    poliomino2.move_p(MX,MY);
+    poliomino3.move_p(MX,MY);
+    return false;
 }
 function mouseReleased(){
-    if (poliomino.jugada ==0 ){
+    if (jugada_valida==0 ){
         poliomino.posx=poliomino.firstposx;
         poliomino.posy=poliomino.firstposy;
     }else{
@@ -81,7 +89,7 @@ function mouseReleased(){
         poliomino = new Poliomino(135,150,30);
         Turnos += 1;
     }
-    if (poliomino2.jugada==0 ){
+    if (jugada_valida2==0 ){
         poliomino2.posx=poliomino2.firstposx;
         poliomino2.posy=poliomino2.firstposy;
     }else{
@@ -89,7 +97,7 @@ function mouseReleased(){
         poliomino2 = new Poliomino(135,300,30);
         Turnos += 1;
     }
-    if (poliomino3.jugada==0 ){
+    if (jugada_valida3==0 ){
         poliomino3.posx=poliomino3.firstposx;
         poliomino3.posy=poliomino3.firstposy;
     }else{
@@ -101,4 +109,7 @@ function mouseReleased(){
 }
 function debugPolyomino(poliomino) {
     console.log(poliomino._shape);
+}
+function Perdiste(){
+    perder = true;
 }
