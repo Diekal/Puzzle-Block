@@ -11,6 +11,9 @@ var Turnos = 1;
 var score = 0;
 var FilasCompletas = 0;
 var perder = Boolean(false);
+var movimiento = Boolean(false);
+var movimiento2 = Boolean(false);
+var movimiento3 = Boolean(false);
 var BombaEliminada = true;
 function setup() {
     //se define cada objeto
@@ -67,14 +70,23 @@ function draw() {
 
 
 }
-
+function mousePressed(){
+    movimiento=poliomino.verificar_p(mouseX,mouseY);
+    movimiento2=poliomino2.verificar_p(mouseX,mouseY);
+    movimiento3=poliomino3.verificar_p(mouseX,mouseY);
+    return false;
+}
 // esta funcion detecta cuando se mantiene click y se mueve el mause para llamar a el metodo que da movimiento
 function mouseDragged() {
-    var MX=mouseX;
-    var MY=mouseY;
-    poliomino.move_p(MX,MY);
-    poliomino2.move_p(MX,MY);
-    poliomino3.move_p(MX,MY);
+    if (movimiento==true){
+        poliomino.move_p(mouseX,mouseY);
+    }
+    if (movimiento2==true){
+        poliomino2.move_p(mouseX,mouseY);
+    }
+    if (movimiento3==true){
+        poliomino3.move_p(mouseX,mouseY);
+    }
     return false;
 }
 // Esta funcion se llama cuando se suleta un click
@@ -105,6 +117,9 @@ function mouseReleased(){
         poliomino3 = new Poliomino(135,450,30);
         Turnos += 1;
     }
+    movimiento=false;
+    movimiento2=false;
+    movimiento3=false;
     return false;
 }
 function debugPolyomino(poliomino) {

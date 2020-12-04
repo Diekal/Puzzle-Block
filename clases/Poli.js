@@ -21,10 +21,14 @@ class Poliomino  {
    */ 
     //este metodo recibe la posicion del mouse y lee la pocicion del poliomino para permitir su movimiento
     move_p(mX,mY){
+        this.posx = mX;
+        this.posy = mY;
+    }
+    
+    verificar_p(mX,mY){
         if (mX >= ((this.posx)-((this._shape[0].length*this.longitud)/2) ) &&  mX <= ((this.posx)+((this._shape[0].length*this.longitud)/2))) {
             if (mY >= ((this.posy)-((this._shape.length*this.longitud)/2))  &&  mY <= ((this.posy)+((this._shape.length*this.longitud)/2))){
-                this.posx = mX;
-                this.posy = mY;
+                return true;
            }
         }
     }
