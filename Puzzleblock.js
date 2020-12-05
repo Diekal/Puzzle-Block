@@ -23,9 +23,9 @@ function setup() {
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 200, 250, 2);
     tablero = new Tablero(12, 12);
-    poliomino = new Poliomino(135,150,30);
-    poliomino2 = new Poliomino(135,300,30);
-    poliomino3 = new Poliomino(135,450,30);
+    poliomino = new P_cuadrado(135,150,30);
+    poliomino2 = new P_cuadrado(135,300,30);
+    poliomino3 = new P_cuadrado(135,450,30);
     tablero.crearTablero();
     bomba = new Bombas();
     bomba.crearBomba();
@@ -98,7 +98,7 @@ function mouseReleased(){
         poliomino.posy=poliomino.firstposy;
     }else{
         tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria);
-        poliomino = new Poliomino(135,150,30);
+        poliomino = new P_cuadrado(135,150,30);
         Turnos += 1;
     }
     if (poliomino2.jugada==0 ){
@@ -106,7 +106,7 @@ function mouseReleased(){
         poliomino2.posy=poliomino2.firstposy;
     }else{
         tablero.TableroMemoria=poliomino2.guardar_tablero(tablero.TableroMemoria);
-        poliomino2 = new Poliomino(135,300,30);
+        poliomino2 = new P_cuadrado(135,300,30);
         Turnos += 1;
     }
     if (poliomino3.jugada==0 ){
@@ -114,7 +114,7 @@ function mouseReleased(){
         poliomino3.posy=poliomino3.firstposy;
     }else{
         tablero.TableroMemoria=poliomino3.guardar_tablero(tablero.TableroMemoria);
-        poliomino3 = new Poliomino(135,450,30);
+        poliomino3 = new P_cuadrado(135,450,30);
         Turnos += 1;
     }
     movimiento=false;
