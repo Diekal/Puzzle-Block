@@ -7,6 +7,9 @@ var poliomino;
 var poliomino2;
 var poliomino3;
 var tablero;
+var posicion;
+var posicion2;
+var posicion3;
 var Turnos = 1;
 var score = 0;
 var FilasCompletas = 0;
@@ -23,9 +26,9 @@ function setup() {
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 200, 250, 2);
     tablero = new Tablero(12, 12);
-    poliomino = new Poliomino(135,150,30);
-    poliomino2 = new Poliomino(135,300,30);
-    poliomino3 = new Poliomino(135,450,30);
+    poliomino = new P_cuadrado(135,150,30);
+    poliomino2 = new P_cuadrado(135,300,30);
+    poliomino3 = new P_cuadrado(135,450,30);
     tablero.crearTablero();
     bomba = new Bombas();
     bomba.crearBomba();
@@ -41,9 +44,9 @@ function draw() {
         tablero.dibujarTablero();
         tablero.EliminarColumnaFila();
         tablero.dibujarTablero();
-        jugada_valida=poliomino.dibujar_sombra(tablero.TableroMemoria);
-        jugada_valida2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
-        jugada_valida3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
+        posicion=poliomino.dibujar_sombra(tablero.TableroMemoria);
+        posicion2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
+        posicion3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
         poliomino.dibujar_p();
         poliomino2.dibujar_p();
         poliomino3.dibujar_p();
@@ -97,24 +100,24 @@ function mouseReleased(){
         poliomino.posx=poliomino.firstposx;
         poliomino.posy=poliomino.firstposy;
     }else{
-        tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria);
-        poliomino = new Poliomino(135,150,30);
+        tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria,posicion);
+        poliomino = new P_cuadrado(135,150,30);
         Turnos += 1;
     }
     if (poliomino2.jugada==0 ){
         poliomino2.posx=poliomino2.firstposx;
         poliomino2.posy=poliomino2.firstposy;
     }else{
-        tablero.TableroMemoria=poliomino2.guardar_tablero(tablero.TableroMemoria);
-        poliomino2 = new Poliomino(135,300,30);
+        tablero.TableroMemoria=poliomino2.guardar_tablero(tablero.TableroMemoria,posicion2);
+        poliomino2 = new P_cuadrado(135,300,30);
         Turnos += 1;
     }
     if (poliomino3.jugada==0 ){
         poliomino3.posx=poliomino3.firstposx;
         poliomino3.posy=poliomino3.firstposy;
     }else{
-        tablero.TableroMemoria=poliomino3.guardar_tablero(tablero.TableroMemoria);
-        poliomino3 = new Poliomino(135,450,30);
+        tablero.TableroMemoria=poliomino3.guardar_tablero(tablero.TableroMemoria,posicion3);
+        poliomino3 = new P_cuadrado(135,450,30);
         Turnos += 1;
     }
     movimiento=false;
