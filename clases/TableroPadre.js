@@ -16,7 +16,7 @@ class Tablero {
         for (var co = 0; co < this.columna; co++) {
             for (var f = 0; f < this.fila; f++) {
                 if (this.TableroMemoria[co][f] != "💣") {
-                    fill(this.TableroMemoria[co][f])
+                    fill(this.TableroMemoria[co][f]);
                     rect(310 + (co * this.tamaño), 45 + (f * this.tamaño), this.tamaño, this.tamaño);
                 }
                 else {
@@ -43,4 +43,85 @@ class Tablero {
             }
       
     }
+    dibujar_unidad(x, y, radius, npoints) {
+        let angle = TWO_PI / npoints;
+        beginShape();
+        for (let a = 0; a < TWO_PI; a += angle) {
+          let sx = x + cos(a) * radius;
+          let sy = y + sin(a) * radius;
+          vertex(sx, sy);
+        }
+        endShape(CLOSE);
+    }
+}
+
+class Tablero_Hex extends  Tablero{
+    
+    crearTablero(){
+        this.TableroMemoria = [["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","nulo","nulo","nulo","nulo"],
+                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","nulo","nulo","nulo"],
+                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","nulo","nulo"],
+                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","nulo"],
+                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
+                               ["nulo","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
+                               ["nulo","nulo","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
+                               ["nulo","nulo","nulo","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
+                               ["nulo","nulo","nulo","nulo","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"]];
+    }
+
+    dibujarTablero() { 
+        push();
+        stroke('black');
+        strokeWeight(3);
+        for (var co = 0; co < this.columna; co++) {
+            for (var f = 0; f < this.fila; f++) {
+                if (this.TableroMemoria[co][f]!="nulo"){
+                    fill(this.TableroMemoria[co][f]);
+                    this.dibujar_unidad(j * ((this.tamaño/2)+(this.tamaño*cos(TWO_PI /6)/2)), (i * this.tamaño*sin(TWO_PI /6)-j*(this.tamaño/2)*sin(TWO_PI /6)), this.tamaño/2, 6);
+                }
+            }
+        }
+        pop();    
+    }
+
+    EliminarColumnaFila() { 
+        for (var iME = 8; iME >= 0; iME--) {
+            var siEliminarFila = Boolean(true); //Es para indicar si una fila esta com´puesta de valores diferentes a "#292B4A" es decir si todas las celdas estan ocupadas.
+            for (var jME = 0; jME < 9; jME++) {
+                if (this.TableroMemoria[iME][jME] == "#292B4A") {
+                    siEliminarFila = false;
+                }
+            }
+            if (siEliminarFila) {
+                var k = iME;
+                for (var m = 0; m < 9; m++) {
+                    if (this.TableroMemoria[k][m] != "nulo"){
+                        this.TableroMemoria[k][m] = "#292B4A";
+                    } 
+                }
+                score += 50;
+                FilasCompletas += 1;
+            }
+        }
+        for (var iME = 8; iME >= 0; iME--) {
+            var siEliminarColumna = Boolean(true); // Elimina Columnas.
+            for (var jME = 0; jME < 9; jME++) {
+                if (this.TableroMemoria[jME][iME] == "#292B4A") {
+                    siEliminarColumna = false;
+                }
+            }
+            if (siEliminarColumna) {
+                var k = iME;
+                for (var m = 0; m < 8; m++) {
+                    if (this.TableroMemoria[m][k] != "nulo"){
+                        this.TableroMemoria[m][k] = "#292B4A";
+                    }
+                }
+                score += 50;
+                FilasCompletas += 1;
+            }
+        }
+      
+    }
+
 }

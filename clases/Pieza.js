@@ -32,7 +32,6 @@ class Pieza  {
            }
         }
     }
-
     dibujar_unidad(x, y, radius, npoints) {
         let angle = TWO_PI / npoints;
         beginShape();
@@ -180,8 +179,19 @@ class P_cuadrado extends Pieza {
 
 class poli_hexagonos extends Poliomino{
 
-    constructor(px,py,long){
-        super(px,py,long);
+    dibujar_p()  {
+        push();
+        stroke('black');
+        strokeWeight(3);
+        translate(this.posx,this.posy)
+        for (var i = 0; i < this._shape.length; i++) {
+            for (var j = 0; j < this._shape[i].length; j++) {
+                if (this._shape[i][j] != 0) {
+                    fill(this._shape[i][j]);
+                    this.dibujar_unidad(j * ((this.longitud/2)+(this.longitud*cos(TWO_PI /6)/2)), (i * this.longitud*sin(TWO_PI /6)-j*(this.longitud/2)*sin(TWO_PI /6)), this.longitud/2, 6);
+                }
+            }  
+        }
+        pop();
     }
-
 }
