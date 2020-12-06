@@ -25,7 +25,7 @@ function setup() {
     SegundoMarco = new MarcosCuadros(280, 15, 635, 635, 1);
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 200, 250, 2);
-    tablero = new Tablero(12, 12);
+    tablero = new Tablero( 12, 12, 48);
     poliomino = new P_cuadrado(135,150,30);
     poliomino2 = new P_cuadrado(135,300,30);
     poliomino3 = new P_cuadrado(135,450,30);

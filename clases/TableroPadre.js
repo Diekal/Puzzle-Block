@@ -27,20 +27,46 @@ class Tablero {
             }
         }
     }
-    RevisarFila() { 
-        var siEliminarFila = Boolean(true); //Es para indicar si una fila esta compuesta de valores diferentes a "#292B4A" es decir si todas las celdas estan ocupadas.
-        for (var jME = 0; jME < this.fila; jME++) {
-             if (this.TableroMemoria[iME][jME] == "#292B4A") {
-                    siEliminarFila = false;}
-            }
-        }
-    RevisarColumna(){
-        var siEliminarColumna = Boolean(true); // Elimina Columnas.
-        for (var jME = 0; jME < this.columna; jME++) {
-            if (this.TableroMemoria[jME][iME] == "#292B4A") {
-                siEliminarColumna = false;
+    EliminarColumnaFila() { 
+        for (var iME = (this.columna-1); iME >= 0; iME--) {
+            var siEliminarFila = Boolean(true); //Es para indicar si una fila esta com´puesta de valores diferentes a "#292B4A" es decir si todas las celdas estan ocupadas.
+            for (var jME = 0; jME < this.fila; jME++) {
+                if (this.TableroMemoria[iME][jME] == "#292B4A") {
+                    siEliminarFila = false;
                 }
             }
+            if (siEliminarFila) {
+                var k = iME;
+                for (var m = 0; m < this.columna; m++) {
+                    if (this.TableroMemoria[k][m] == "💣"){
+                        BombaEliminada = true;
+                    }
+                    if (this.TableroMemoria[k][m] != "nulo"){
+                        this.TableroMemoria[k][m] = "#292B4A";
+                    } 
+                }
+                score += 50;
+                FilasCompletas += 1;
+            }
+        }
+        for (var iME = (this.columna-1); iME >= 0; iME--) {
+            var siEliminarColumna = Boolean(true); // Elimina Columnas.
+            for (var jME = 0; jME < this.fila; jME++) {
+                if (this.TableroMemoria[jME][iME] == "#292B4A") {
+                    siEliminarColumna = false;
+                }
+            }
+            if (siEliminarColumna) {
+                var k = iME;
+                for (var m = 0; m < this.columna; m++) {
+                    if (this.TableroMemoria[m][k] != "nulo"){
+                        this.TableroMemoria[m][k] = "#292B4A";
+                    }
+                }
+                score += 50;
+                FilasCompletas += 1;
+            }
+        }
       
     }
     dibujar_unidad(x, y, radius, npoints) {
@@ -54,6 +80,10 @@ class Tablero {
         endShape(CLOSE);
     }
 }
+
+//class Tablero_cua extends Tablero{
+
+//}
 
 class Tablero_Hex extends  Tablero{
     
@@ -82,46 +112,6 @@ class Tablero_Hex extends  Tablero{
             }
         }
         pop();    
-    }
-
-    EliminarColumnaFila() { 
-        for (var iME = 8; iME >= 0; iME--) {
-            var siEliminarFila = Boolean(true); //Es para indicar si una fila esta com´puesta de valores diferentes a "#292B4A" es decir si todas las celdas estan ocupadas.
-            for (var jME = 0; jME < 9; jME++) {
-                if (this.TableroMemoria[iME][jME] == "#292B4A") {
-                    siEliminarFila = false;
-                }
-            }
-            if (siEliminarFila) {
-                var k = iME;
-                for (var m = 0; m < 9; m++) {
-                    if (this.TableroMemoria[k][m] != "nulo"){
-                        this.TableroMemoria[k][m] = "#292B4A";
-                    } 
-                }
-                score += 50;
-                FilasCompletas += 1;
-            }
-        }
-        for (var iME = 8; iME >= 0; iME--) {
-            var siEliminarColumna = Boolean(true); // Elimina Columnas.
-            for (var jME = 0; jME < 9; jME++) {
-                if (this.TableroMemoria[jME][iME] == "#292B4A") {
-                    siEliminarColumna = false;
-                }
-            }
-            if (siEliminarColumna) {
-                var k = iME;
-                for (var m = 0; m < 8; m++) {
-                    if (this.TableroMemoria[m][k] != "nulo"){
-                        this.TableroMemoria[m][k] = "#292B4A";
-                    }
-                }
-                score += 50;
-                FilasCompletas += 1;
-            }
-        }
-      
     }
 
 }
