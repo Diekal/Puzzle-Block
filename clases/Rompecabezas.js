@@ -238,6 +238,10 @@ var FichaAy = 0;
 var CColumnas = 2;
 var CFilas = 2;
 var TamañoFicha = 400/CColumnas;
+var x1;
+var y1;
+var Piezas = [];
+var Perdiste= Boolean(false);
 function setup() {
   createCanvas(1200, 1000, WEBGL);
   imageMode(CENTER);
@@ -246,30 +250,82 @@ function setup() {
 }
 function preload() {
   img = loadImage('/tetris2.jpg');
+  img2 = loadImage('/perder.jpg');
 }
 function draw() {
   background(255);
+  fill('#222222');
+  rect(80,-400,400,400);
   for (var x = 0; x < CColumnas; x++) {;
     for (var j = 0; j < (CFilas * 2); j++) {
-        Puzzle.TableroMemoria[x][j].show();}
+        Puzzle.TableroMemoria[x][j].show();
+        }
       }
+  if (Perdiste){
+    image(img2, 100, -330, 800, 700);
+  }
 }
 function mouseDragged() {
-  var x1 = map(mouseX, 0, 1200, -600, 600);
-  var y1 = map(mouseY, 0, 1200, -400, 600);
-  Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(x1, y1);
-  console.log(FichaAx);
-  console.log(FichaAy);
-}
+  x1 = map(mouseX, 0, 1200, -600, 600);
+  y1 = map(mouseY, 0, 1200, -400, 600);
+  try{
+  Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(x1, y1); }
+  catch{
+    var ValorMenor = -1;
+    for (var xE = 0; xE < Piezas.length; xE++){
+      if (ValorMenor > Piezas[xE]){
+        Perdiste = true;
+        return Perdiste;
+      } 
+      ValorMenor = Piezas[xE];
+    }
+   }
+  }
 function mousePressed(){
 }
 function mouseReleased(){
+  if ((x1 >= 30 && x1 <= 50) && y1 <= -190){
+    Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(40, -200);
+    if (FichaAy %2 ==0){
+      Piezas.push(0)
+    }
+    else{
+      Piezas.push(1)
+    }
+  }
+  if ((x1 >= 130 && x1 <= 150) && y1 <= -190){
+    Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(140, -200);
+    if (FichaAy %2 ==0){
+      Piezas.push(2)
+    }
+    else{
+      Piezas.push(3)
+    }
+  }
+  if ((x1 >= 30 && x1 <= 50) && y1 >= -110){
+    Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(40, -100);
+    if (FichaAy %2 ==0){
+      Piezas.push(4)
+    }
+    else{
+      Piezas.push(5)
+    }
+   }
+  if ((x1 >= 130 && x1 <= 150) && y1 >= -110){
+    Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(140, -100);
+    if (FichaAy %2 ==0){
+      Piezas.push(6)
+    }
+    else{
+      Piezas.push(7)
+    }
+  }
   if (FichaAy > CFilas){
-    FichaAy = -1;
+    FichaAy = - 1;
     FichaAx += 1;
   }
   FichaAy += 1;
-}
+ } 
 class TableroRompecabezas extends Tablero {
     constructor(columna, fila) {
        super(columna, fila);
@@ -277,19 +333,7 @@ class TableroRompecabezas extends Tablero {
     crearTablero(){
         super.crearTablero();
     }
-    RevisarFila() { 
-        var RompecabezasCompleto = Boolean(true);
-        for (var iME = this.fila; iME >= 0; iME--) {
-             super.RevisarFila();
-            if (siEliminarFila == false){
-              var perder = Boolean(true);
-              break;
-            }
-            var perder = Boolean(false);
-    }
- }
-}
-
+  }
 class Ficha extends Poliomino{
   constructor(px,py,longColumna,LongFila,NFila,NColumna){
     super(px,py,longColumna);
