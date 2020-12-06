@@ -1,32 +1,9 @@
 // Rompecabezas
 // function draw() {}
-function setBorder() {
-  for (let row = 0; row < Puzzle.columna; row++) {
-    for (let col = 0; col < Puzzle.fila; col++) {
-      if (row === 0) {
-        grid[row][col].border[0] = false;
-      }
-      if (col === (Puzzle.columna - 1)) {
-        grid[row][col].border[1] = false;
-      }
-      if (row === (Puzzle.fila - 1)) {
-        grid[row][col].border[2] = false;
-      }
-      if (col === 0) {
-        grid[row][col].border[3] = false;
-      }
-      if (row !== 0) {
-        grid[row][col].border[0] = !(grid[row - 1][col].border[2]);
-      }
-      if (col !== 0) {
-        grid[row][col].border[3] = !(grid[row][col - 1].border[1]);
-      }
-    }
-  }
-}
 class Tablero {
   constructor(columna, fila) {
-      this.columna = columna;
+      this.columna = columna * 2;
+      this.Ccolum = columna;
       this.fila = fila;
       this.TableroMemoria = Array(this.columna);
   }
@@ -34,11 +11,10 @@ class Tablero {
       for (var x = 0; x < this.fila; x++) {
           this.TableroMemoria[x] = Array(this.fila);
           for (var j = 0; j < this.columna; j++) {
-              var fx = x * 50 + 50 * 0.5;
-              var fy = y * 50 + 50 * 0.5;
-              this.TableroMemoria[x][j] = new Ficha(fx, fy, 50);}
+              var Cpixeles = 700/ (this.Ccolum);
+              var Fpixeles = 700/ (this.fila);
+              this.TableroMemoria[x][j] = new Ficha(-200,(-250 + TamañoFicha) - (j * 10), Cpixeles, Fpixeles, x,j);}
       }
-    setBorder();
   }
   dibujarTablero() { //Dibuja el tablero de acuerdo al color o si es una bomba la figura 
       for (var co = 0; co < this.columna; co++) {
@@ -257,20 +233,42 @@ elegir_p(){
 }
 var Puzzle;
 var img;
-var PiezaTamaño;
+var FichaAx = 0;
+var FichaAy = 0;
+var CColumnas = 2;
+var CFilas = 2;
+var TamañoFicha = 400/CColumnas;
 function setup() {
-  createCanvas(400, 400, WEBGL);
+  createCanvas(1200, 1000, WEBGL);
   imageMode(CENTER);
-  Puzzle =  new Ficha(0, 200, 50);
+  Puzzle =  new TableroRompecabezas( CColumnas, CFilas);
+  Puzzle.crearTablero();
 }
 function preload() {
   img = loadImage('/tetris2.jpg');
 }
 function draw() {
-  Puzzle.show();
+  background(255);
+  for (var x = 0; x < CColumnas; x++) {;
+    for (var j = 0; j < (CFilas * 2); j++) {
+        Puzzle.TableroMemoria[x][j].show();}
+      }
 }
 function mouseDragged() {
-  Puzzle.move_p(mouseX, mouseY);
+  var x1 = map(mouseX, 0, 1200, -600, 600);
+  var y1 = map(mouseY, 0, 1200, -400, 600);
+  Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(x1, y1);
+  console.log(FichaAx);
+  console.log(FichaAy);
+}
+function mousePressed(){
+}
+function mouseReleased(){
+  if (FichaAy > CFilas){
+    FichaAy = -1;
+    FichaAx += 1;
+  }
+  FichaAy += 1;
 }
 class TableroRompecabezas extends Tablero {
     constructor(columna, fila) {
@@ -293,29 +291,36 @@ class TableroRompecabezas extends Tablero {
 }
 
 class Ficha extends Poliomino{
-  constructor(px,py,long){
-    super(px,py,long);
+  constructor(px,py,longColumna,LongFila,NFila,NColumna){
+    super(px,py,longColumna);
+    this.longColumna = longColumna;
+    this.longFila = LongFila;
+    this.PNCol = NColumna;
+    if (NColumna == 0 || NColumna == 1){
+      this.NColumna = NColumna + 1;}
+    else{
+      this.NColumna = NColumna;
   }
-  drawBorder(theta){
-    var startPoint = createVector(-0.5 * 150, -0.5 * 150);
-    var endPoint = createVector(0.5 * 150, -0.5 * 150);
-    var offsetX = 150 * 0.35;
-    var offsetY = -150 * 0.2;
+    this.NFila = NFila;
+  }
+  show(){
     noStroke();
     texture(img);
     textureMode(IMAGE);
+    push();
+    translate(this.posx, this.posy);
     beginShape();
-    vertex(this.posx, this.posx, 0, 0);
-    vertex(this.posy, this.posx, 700, 0);
-    vertex(this.posy, this.posy, 700 ,700 );
+    if (this.PNCol % 2 == 0) {
+      vertex(this.posx, this.posy, (this.NColumna-1)*(this.longColumna), this.NFila*(this.longFila));
+      vertex((this.posx), (this.posy + TamañoFicha), (this.NColumna-1)*(this.longColumna), (this.NFila + 1)*(this.longFila));
+      vertex((this.posx + TamañoFicha), (this.posy + TamañoFicha), (this.NColumna)*(this.longColumna),(this.NFila + 1)*(this.longFila));
+    }
+    else{
+      vertex(this.posx, this.posy, (this.NColumna-2)*(this.longColumna), this.NFila*(this.longFila));
+      vertex((this.posx + TamañoFicha), (this.posy), (this.NColumna-1)*(this.longColumna), this.NFila*(this.longFila));
+      vertex((this.posx + TamañoFicha), (this.posy + TamañoFicha), (this.NColumna-1)*(this.longColumna) ,(this.NFila + 1)*(this.longFila));
+    }
     endShape();
-    
+    pop();
   }
-  show(){
-  for(var j = 0; j < 4; j++) {
-      var theta = j * PI / 2;
-      this.drawBorder(theta);
-
-   }
  }  
-}
