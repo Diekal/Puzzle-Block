@@ -44,27 +44,21 @@ class Pieza  {
     }
     /**
    * @param { Array} tablero
+   * @param { Array} pos
+   * @param { number} tamano
    */ 
    // este metodo es llamado cuando se suelta el click, si la jugada es valida guarda el poliomino en el tablero
-    guardar_tablero(tablero){
-        for(let i=0;i<=(tablero.length-this._shape.length); i++){
-            for(let j=0;j<=(tablero[i].length-this._shape[0].length); j++){
-                if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
-                    if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
-                        for (var g = 0; g < this._shape.length; g++) {
-                            for (var f = 0; f < this._shape[g].length; f++) {
-                                    if (this._shape[g][f] != 0) {
-                                        tablero[j+f][i+g]=this._shape[g][f];
-                                        score +=10;
-                                    }
-                            }  
-                        }
-                        return tablero; 
+    guardar_tablero(tablero,pos){
+        for (var g = 0; g < this._shape.length; g++) {
+            for (var f = 0; f < this._shape[g].length; f++) {
+                    if (this._shape[g][f] != 0) {
+                        tablero[pos[0]+f][pos[1]+g]=this._shape[g][f];
+                        score +=10;
                     }
-                }
-            }
+            }  
         }
-    }
+        return tablero;
+    } 
    /**
    * @returns {Array} 
    */ 
@@ -169,7 +163,7 @@ class P_cuadrado extends Pieza {
                           }  
                        }
                       pop();
-                      break; 
+                      return [j,i]; 
                   }
               }
           }
@@ -194,4 +188,35 @@ class poli_hexagonos extends Poliomino{
         }
         pop();
     }
+    dibujar_sombra(tablero){
+        this.jugada  = 0;
+        for(let i=0;i<=(tablero.length-this._shape.length); i++){
+            for(let j=0;j<=(tablero[i].length-this._shape[0].length); j++){
+                if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
+                    if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
+                        this.jugada = 1;
+                        push();
+                        stroke('black');
+                        strokeWeight(3);
+                        translate(310 + (j * 48),45 + (i * 48));
+                        for (var g = 0; g < this._shape.length; g++) {
+                            for (var f = 0; f < this._shape[g].length; f++) {
+                                    if (this._shape[g][f] != 0) {
+                                        fill("#99CCFF");
+                                        this.dibujar_unidad(f * ((this.longitud/2)+(this.longitud*cos(TWO_PI /6)/2)), (g * this.longitud*sin(TWO_PI /6)-f*(this.longitud/2)*sin(TWO_PI /6)), this.longitud/2, 6);
+                                        if(tablero[j+f][i+g]!="#292B4A"){  //revisa que esa casilla este vacia
+                                            this.jugada  = 0;
+                                        }
+                                    }
+                            }  
+                         }
+                        pop();
+                        break; 
+                    }
+                }
+            }
+        }
+    }
+
+
 }

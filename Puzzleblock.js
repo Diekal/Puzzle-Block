@@ -7,6 +7,9 @@ var poliomino;
 var poliomino2;
 var poliomino3;
 var tablero;
+var posicion;
+var posicion2;
+var posicion3;
 var Turnos = 1;
 var score = 0;
 var FilasCompletas = 0;
@@ -41,9 +44,9 @@ function draw() {
         tablero.dibujarTablero();
         tablero.EliminarColumnaFila();
         tablero.dibujarTablero();
-        jugada_valida=poliomino.dibujar_sombra(tablero.TableroMemoria);
-        jugada_valida2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
-        jugada_valida3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
+        posicion=poliomino.dibujar_sombra(tablero.TableroMemoria);
+        posicion2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
+        posicion3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
         poliomino.dibujar_p();
         poliomino2.dibujar_p();
         poliomino3.dibujar_p();
@@ -97,7 +100,7 @@ function mouseReleased(){
         poliomino.posx=poliomino.firstposx;
         poliomino.posy=poliomino.firstposy;
     }else{
-        tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria);
+        tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria,posicion);
         poliomino = new P_cuadrado(135,150,30);
         Turnos += 1;
     }
@@ -105,7 +108,7 @@ function mouseReleased(){
         poliomino2.posx=poliomino2.firstposx;
         poliomino2.posy=poliomino2.firstposy;
     }else{
-        tablero.TableroMemoria=poliomino2.guardar_tablero(tablero.TableroMemoria);
+        tablero.TableroMemoria=poliomino2.guardar_tablero(tablero.TableroMemoria,posicion2);
         poliomino2 = new P_cuadrado(135,300,30);
         Turnos += 1;
     }
@@ -113,7 +116,7 @@ function mouseReleased(){
         poliomino3.posx=poliomino3.firstposx;
         poliomino3.posy=poliomino3.firstposy;
     }else{
-        tablero.TableroMemoria=poliomino3.guardar_tablero(tablero.TableroMemoria);
+        tablero.TableroMemoria=poliomino3.guardar_tablero(tablero.TableroMemoria,posicion3);
         poliomino3 = new P_cuadrado(135,450,30);
         Turnos += 1;
     }
