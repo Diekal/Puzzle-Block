@@ -1,4 +1,6 @@
-# Puzzle-Block
+# Rompecabezas, poliformas, mosaicos y más...
+El principal objetivo de este proyecto es plantear una serie de codigos base orientados a objetos, que sirvan como base para el desarrollo de videojuegos sencillos tipo rompecabeza, que podrian tener como principal funcionalidad en la sociedad el 
+## Puzzle-Block
 El juego consiste en poner fichas o polinomios de diferentes tamaños en un tablero con el fin de poder eliminar la mayor cantidad de filas y columnas posibles.Para esto se tienen 4 clases. Las principales siendo la clase tablero y la clase poliomino.
 ## Class Tablero
 ### Atributos:

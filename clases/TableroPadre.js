@@ -69,6 +69,7 @@ class Tablero {
         }
       
     }
+    //Metodo tomado de la clase pieza que resulta ser igual de util para esta clase
     dibujar_unidad(x, y, radius, npoints) {
         let angle = TWO_PI / npoints;
         beginShape();
@@ -82,7 +83,7 @@ class Tablero {
 }
 
 class Tablero_Hex extends  Tablero{
-    
+    //buscando que el tablero tenga forma hexagonal se replantea el tablero base
     crearTablero(){
         this.TableroMemoria = [["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A",0,0,0,0],
                                ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A",0,0,0],
@@ -94,7 +95,7 @@ class Tablero_Hex extends  Tablero{
                                [0,0,0,"#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
                                [0,0,0,0,"#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"]];
     }
-
+    //dado que la distribucion del mosaico es diferente se debe replantear este metodo
     dibujarTablero() { 
         push();
         stroke('black');
@@ -115,7 +116,7 @@ class Tablero_Hex extends  Tablero{
 }
 
 class Tablero_Poligono extends  Tablero{
-    
+    //dibuja el tablero teniendo en cuenta la forma de cada unidad del poliomino
     dibujarTablero(lados) { 
         push();
         stroke('black');
@@ -131,21 +132,5 @@ class Tablero_Poligono extends  Tablero{
             }
         }
         pop();    
-    }
-}
-//import "pieza.js" ;
-
-class TableroRompecabezas extends Tablero {
-    constructor(columna, fila,tamaño) {
-       super(columna, fila,tamaño);
-    }
-    crearTablero(TamañoFicha) { // Crea un arreglo bidimensional de celdas del color "#292B4A" para tener un registro en memoria
-    for (var x = 0; x < this.fila; x++) {
-        this.TableroMemoria[x] = Array(this.fila);
-        for (var j = 0; j < this.columna; j++) {
-            var Cpixeles = 700/ (this.Ccolum);
-            var Fpixeles = 700/ (this.fila);
-            this.TableroMemoria[x][j] = cargarficha(-200,(-250 + TamañoFicha) - (j * 10), Cpixeles, Fpixeles, x,j);}
-        }
     }
 }
