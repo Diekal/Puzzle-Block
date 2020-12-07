@@ -26,8 +26,8 @@ class Pieza  {
     }
     
     verificar_p(mX,mY){
-        if (mX >= ((this.posx)-((this._shape[0].length*this.longitud)/2) ) &&  mX <= ((this.posx)+((this._shape[0].length*this.longitud)/2))) {
-            if (mY >= ((this.posy)-((this._shape.length*this.longitud)/2))  &&  mY <= ((this.posy)+((this._shape.length*this.longitud)/2))){
+        if (mX >= ((this.posx)-((this._shape[0].length*this.longitud)) ) &&  mX <= ((this.posx)+((this._shape[0].length*this.longitud)))) {
+            if (mY >= ((this.posy)-((this._shape.length*this.longitud)))  &&  mY <= ((this.posy)+((this._shape.length*this.longitud)))){
                 return true;
            }
         }
@@ -41,6 +41,39 @@ class Pieza  {
           vertex(sx, sy);
         }
         endShape(CLOSE);
+    }
+   /**
+   * @param { Array} tablero
+   * @returns {Array}
+   */
+    dibujar_sombra(tablero,poscx,poscy,longit,radio,lados){
+        this.jugada  = 0;
+        for(let i=0;i<=(tablero.length-this._shape.length); i++){
+            for(let j=0;j<=(tablero[i].length-this._shape[0].length); j++){
+                if(this.posx > (poscx + (j * longit)) && this.posx < (poscx + ((j+1) * longit))){
+                    if(this.posy > (poscy + (i * longit)) && this.posy < (poscy + ((i+1) * longit))){
+                        this.jugada = 1;
+                        push();
+                        stroke('black');
+                        strokeWeight(3);
+                        translate(poscx + (j * longit),poscy + (i * longit));
+                        for (var g = 0; g < this._shape.length; g++) {
+                            for (var f = 0; f < this._shape[g].length; f++) {
+                                    if (this._shape[g][f] != 0) {
+                                        fill("#99CCFF");
+                                        this.dibujar_unidad(f * longit, g * longit, radio, lados);
+                                        if(tablero[j+f][i+g]!="#292B4A"){  //revisa que esa casilla este vacia
+                                            this.jugada  = 0;
+                                        }
+                                    }
+                            }  
+                         }
+                        pop();
+                        return [j,i]; 
+                    }
+                }
+            }
+        }
     }
     /**
    * @param { Array} tablero
@@ -115,8 +148,8 @@ class Pieza  {
 class P_cuadrado extends Pieza {
 
 
-  dibujar_unidad(x, y, radius, npoints) {
-      rect(x,y,radius, npoints);
+  dibujar_unidad(x, y, dx, dy) {
+      rect(x,y,dx, dy);
   }
   dibujar_p()  {
       push();
@@ -133,40 +166,12 @@ class P_cuadrado extends Pieza {
       }
       pop();
   }
-  /**
- * @param { Array} tablero
- * @returns {Array}
- * 
- */
-  // tomando como informacion las pociciones del tablero este metodo dibuja la posibilidad de juego.
-  dibujar_sombra(tablero){
-      this.jugada  = 0;
-      for(let i=0;i<=(tablero.length-this._shape.length); i++){
-          for(let j=0;j<=(tablero[i].length-this._shape[0].length); j++){
-              if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
-                  if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
-                      this.jugada = 1;
-                      push();
-                      stroke('black');
-                      strokeWeight(3);
-                      translate(310 + (j * 48),45 + (i * 48));
-                      for (var g = 0; g < this._shape.length; g++) {
-                          for (var f = 0; f < this._shape[g].length; f++) {
-                                  if (this._shape[g][f] != 0) {
-                                      fill("#99CCFF");
-                                      rect(f * 48, g * 48, 48, 48);
-                                      if(tablero[j+f][i+g]!="#292B4A"){  //revisa que esa casilla este vacia
-                                          this.jugada  = 0;
-                                      }
-                                  }
-                          }  
-                       }
-                      pop();
-                      return [j,i]; 
-                  }
-              }
-          }
-      }
+  verificar_p(mX,mY){
+    if (mX >= ((this.posx)-((this._shape[0].length*this.longitud)/2) ) &&  mX <= ((this.posx)+((this._shape[0].length*this.longitud)/2))) {
+        if (mY >= ((this.posy)-((this._shape.length*this.longitud)/2))  &&  mY <= ((this.posy)+((this._shape.length*this.longitud)/2))){
+            return true;
+       }
+    }
   }
 }
 
@@ -224,5 +229,23 @@ class Poli_hexagonos extends Pieza{
                 }
             }
         }
+    }
+}
+
+class Poligono extends Pieza{
+    dibujar_p(lados)  {
+        push();
+        stroke('black');
+        strokeWeight(3);
+        translate(this.posx-((this._shape[0].length*this.longitud)/2),this.posy-((this._shape.length*this.longitud)/2));
+        for (var i = 0; i < this._shape.length; i++) {
+            for (var j = 0; j < this._shape[i].length; j++) {
+                if (this._shape[i][j] != 0) {
+                    fill(this._shape[i][j]);
+                    this.dibujar_unidad((j * (2*this.longitud)), i * (2*this.longitud), this.longitud, lados);
+                }
+            }  
+        }
+        pop();
     }
 }

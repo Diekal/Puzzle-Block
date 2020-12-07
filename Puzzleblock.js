@@ -44,14 +44,15 @@ function draw() {
         tablero.dibujarTablero();
         tablero.EliminarColumnaFila();
         tablero.dibujarTablero();
-        posicion=poliomino.dibujar_sombra(tablero.TableroMemoria);
-        posicion2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
-        posicion3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
+        posicion=poliomino.dibujar_sombra(tablero.TableroMemoria,310,45,48,48,48);
+        posicion2=poliomino2.dibujar_sombra(tablero.TableroMemoria,310,45,48,48,48);
+        posicion3=poliomino3.dibujar_sombra(tablero.TableroMemoria,310,45,48,48,48);
         poliomino.dibujar_p();
         poliomino2.dibujar_p();
         poliomino3.dibujar_p();
         //Se agrega el texto del puntaje y el avance
         textSize(35);
+        fill(0);
         textFont('STCaiyun');
         text("Score", 1010, 100);
         text(score, 1025, 140);

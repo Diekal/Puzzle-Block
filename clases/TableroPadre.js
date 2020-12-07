@@ -113,3 +113,23 @@ class Tablero_Hex extends  Tablero{
     }
 
 }
+
+class Tablero_Poligono extends  Tablero{
+    
+    dibujarTablero(lados) { 
+        push();
+        stroke('black');
+        strokeWeight(3);
+        translate(334,69);
+        for (var co = 0; co < this.columna; co++) {
+            for (var f = 0; f < this.fila; f++) {
+                if (this.TableroMemoria[f][co]!=0){
+                    fill(this.TableroMemoria[f][co]);
+                    this.dibujar_unidad((f * (2*this.tamaño)), co * (2*this.tamaño), this.tamaño, lados);
+                }                
+
+            }
+        }
+        pop();    
+    }
+}

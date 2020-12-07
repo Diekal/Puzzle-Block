@@ -16,33 +16,39 @@ var perder = Boolean(false);
 var movimiento = Boolean(false);
 var movimiento2 = Boolean(false);
 var movimiento3 = Boolean(false);
+var lados = 4;
+
 function setup() {
     //se define cada objeto
-    createCanvas(1200, 660);
+    createCanvas(1200, 660);;
     PrimerMarco = new MarcosCuadros(25, 50, 220, 550, 1);
+    //SegundoMarco = new MarcosCuadros(280, 15, 635, 635, 1);
+    //TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 200, 250, 2);
-    tablero = new Tablero_Hex( 9, 9, 60);
-    poliomino = new Poli_hexagonos(135,150,30);
-    poliomino2 = new Poli_hexagonos(135,300,30);
-    poliomino3 = new Poli_hexagonos(135,450,30);
+    tablero = new Tablero_Poligono( 12, 12, 24);
+    poliomino = new Poligono(135,150,15);
+    poliomino2 = new Poligono(135,300,15);
+    poliomino3 = new Poligono(135,450,15);
     tablero.crearTablero();
     perder=false;
 }
 
 function draw() {
     if(perder==false){
-        background("#CCCC99");
+        background("#9999CC");
         PrimerMarco.dibujar();
+        //SegundoMarco.dibujar();
+        //TercerMarco.dibujar();
         CuartoMarco.dibujar();
-        tablero.dibujarTablero();
+        tablero.dibujarTablero(lados);
         tablero.EliminarColumnaFila();
-        tablero.dibujarTablero();
-        posicion=poliomino.dibujar_sombra(tablero.TableroMemoria);
-        posicion2=poliomino2.dibujar_sombra(tablero.TableroMemoria);
-        posicion3=poliomino3.dibujar_sombra(tablero.TableroMemoria);
-        poliomino.dibujar_p();
-        poliomino2.dibujar_p();
-        poliomino3.dibujar_p();
+        tablero.dibujarTablero(lados);
+        posicion=poliomino.dibujar_sombra(tablero.TableroMemoria,334,69,48,24,lados);
+        posicion2=poliomino2.dibujar_sombra(tablero.TableroMemoria,334,69,48,24,lados);
+        posicion3=poliomino3.dibujar_sombra(tablero.TableroMemoria,334,69,48,24,lados);
+        poliomino.dibujar_p(lados);
+        poliomino2.dibujar_p(lados);
+        poliomino3.dibujar_p(lados);
         //Se agrega el texto del puntaje y el avance   
         textSize(35);
         fill(0);
@@ -51,13 +57,6 @@ function draw() {
         text(score, 1025, 140);
         text("Lineas", 1010, 190);
         text(FilasCompletas, 1035, 230);
-    }else{
-        background(0);
-        fill(255);
-        textSize(60);
-        textFont('STCaiyun');
-        text("Game", 500, 300);
-        text("Over", 500, 350);  
     }
 }
 function mousePressed(){
@@ -88,27 +87,24 @@ function mouseReleased(){
         poliomino.posy=poliomino.firstposy;
     }else{
         tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria,posicion);
-        poliomino = new Poli_hexagonos(135,150,30);
+        poliomino = new Poligono(135,150,15);
     }
     if (poliomino2.jugada==0 ){
         poliomino2.posx=poliomino2.firstposx;
         poliomino2.posy=poliomino2.firstposy;
     }else{
         tablero.TableroMemoria=poliomino2.guardar_tablero(tablero.TableroMemoria,posicion2);
-        poliomino2 = new Poli_hexagonos(135,300,30);
+        poliomino2 = new Poligono(135,300,15);
     }
     if (poliomino3.jugada==0 ){
         poliomino3.posx=poliomino3.firstposx;
         poliomino3.posy=poliomino3.firstposy;
     }else{
         tablero.TableroMemoria=poliomino3.guardar_tablero(tablero.TableroMemoria,posicion3);
-        poliomino3 = new Poli_hexagonos(135,450,30);
+        poliomino3 = new Poligono(135,450,15);
     }
     movimiento=false;
     movimiento2=false;
     movimiento3=false;
     return false;
-}
-function debugPolyomino(poliomino) {
-    console.log(poliomino._shape);
 }
