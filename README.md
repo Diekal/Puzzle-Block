@@ -97,13 +97,15 @@ Tiene adicionalmente el método dibujar_sombra y guardar tablero que son los enc
 ```
 Por otro lado, se agrego el metodo dibujar_unidad en que se define la forma que tendra cada unidad de polomino y por ultimo esta el método elegir_p que escoge cual figura se va a dibujar y guarda la memoria de todos los posible poliominos.
 
-De esta clase "padre" entonces surgen las siguientes clase "hijas" que extienden su funcionalidad de una manera mas especifica.
+De esta clase "padre" entonces surgen las siguientes clase "hijas" que extienden su funcionalidad de una manera mas especifica, todas estas deben plantear su propio metodo de dibujar_p dado que este metodo es especifico para cada situcion.
 ### P_cuadrado.
-Replantea 
-### Tablero_poligono.
-Replantea de manera general el metodo de dibujar tablero para cada caso generado por los diferente poligonos regulares.
-### Tablerorompecabezas.
-Extiende la clase con el objetivo de que ahora el tablero funcione para el caso especifico de un rompecabesaz generado a partir de una imagen. 
+Replantea el metodo dibjar_unidad dado que esta no era compatible con la ya planteada, aparte se replantea tambien el metodo de verificar debido que para este caso el rango de accion de cada figura es diferente al ya planteado.
+### Poli_hexagonos.
+Replantea el metodo de dibujar_sombra debido a que para este caso el tablero se pinta de una manera  muy diferente.
+### Poligono.
+Definen de manera especifica el dibujo de lo poliominos dependiendo de el poligono que se halla escogido para dicha situacion.
+### FichaRompecabezas y Ficha cuadrada.
+Extienden la clase con elobjetivo de que sea posible usarla de manera mas especifica para un rompecabezas.
 
 ## Class Bombas
 El propósito de las bombas es que se ponen en un lugar alzar en el tablero y usuario tiene que eliminarlas antes que exploten o sino pierde.
@@ -111,9 +113,20 @@ El propósito de las bombas es que se ponen en un lugar alzar en el tablero y us
 Tiempo:Es el tiempo que ha transcurrida desde que se creo la bomba en segundos.
 Cols: Es un numero alzar del 0 al 11 luego este numero sera la columna en la que va aparecer la bomba.
 Fil: Es un numero alazar del 0 al 11 que sera la fila.
+## Class Marcos.
+Los marcos no son mas que una decoracion que ayuda a la estetica de los videojuegos.
+
+Entonces a partir de estas clases planteadas se puede decir ya como una libreria es posible desarrollar infinidad de juegos, los siguientes son solo algunos ejemplos de las infinitas posibilidades
 ## Puzzle-Block
 El juego consiste en poner fichas o polinomios de diferentes tamaños en un tablero con el fin de poder eliminar la mayor cantidad de filas y columnas posibles.Para esto se tienen 4 clases. Las principales siendo la clase tablero y la clase poliomino.
+## Hex mode.
+Es una expancion de el original Puzzle-Block con la variante de que ahora se tabaja con hexagonos en vez de cuadrados combiando por completo el diseño de la fichas y del tablero. Las reglas son las mismas y al igual que el puzzle-block original esta inspirado en el clasico tetris.
+## Rompecabezas.
+Uno de los tantos posibles rompecabezas basados en una imagen, este codigo se podria modificar con fines educativos si es esto lo que se busca.
+## Pologonos-Block.
+Otra variante del puzzle-block, pero esta vez generalizado par que sea posible modificar la unidad de cada figura por un poligono regular de cualquier numero de lados, a partir de este codigo se puede generar una inmenza cantidad de mosaicos.
 ## Referencias .
 1. [Juego guia tomado como referencia.](https://play.google.com/store/apps/details?id=game.puzzle.blockpuzzle&hl=es)
 2. [Plantilla de p5 dado por el profesor.](https://github.com/objetos/p5.polyomino.js)
 3. [Referencia de p5.js.](https://p5js.org/es/reference/)
+4. [Metodo de Dibujar unidad, extraido de la galeria de ejemplos de p5.js](https://p5js.org/es/examples/form-regular-polygon.html)
