@@ -133,3 +133,19 @@ class Tablero_Poligono extends  Tablero{
         pop();    
     }
 }
+//import "pieza.js" ;
+
+class TableroRompecabezas extends Tablero {
+    constructor(columna, fila,tamaño) {
+       super(columna, fila,tamaño);
+    }
+    crearTablero(TamañoFicha) { // Crea un arreglo bidimensional de celdas del color "#292B4A" para tener un registro en memoria
+    for (var x = 0; x < this.fila; x++) {
+        this.TableroMemoria[x] = Array(this.fila);
+        for (var j = 0; j < this.columna; j++) {
+            var Cpixeles = 700/ (this.Ccolum);
+            var Fpixeles = 700/ (this.fila);
+            this.TableroMemoria[x][j] = cargarficha(-200,(-250 + TamañoFicha) - (j * 10), Cpixeles, Fpixeles, x,j);}
+        }
+    }
+}

@@ -249,3 +249,38 @@ class Poligono extends Pieza{
         pop();
     }
 }
+
+class Ficha extends Pieza{
+    constructor(px,py,longColumna,LongFila,NFila,NColumna){
+      super(px,py,longColumna);
+      this.longColumna = longColumna;
+      this.longFila = LongFila;
+      this.PNCol = NColumna;
+      if (NColumna == 0 || NColumna == 1){
+        this.NColumna = NColumna + 1;}
+      else{
+        this.NColumna = NColumna;
+    }
+      this.NFila = NFila;
+    }
+    show(img,TamañoFicha){
+      noStroke();
+      texture(img);
+      textureMode(IMAGE);
+      push();
+      translate(this.posx, this.posy);
+      beginShape();
+      if (this.PNCol % 2 == 0) {
+        vertex(this.posx, this.posy, (this.NColumna-1)*(this.longColumna), this.NFila*(this.longFila));
+        vertex((this.posx), (this.posy + TamañoFicha), (this.NColumna-1)*(this.longColumna), (this.NFila + 1)*(this.longFila));
+        vertex((this.posx + TamañoFicha), (this.posy + TamañoFicha), (this.NColumna)*(this.longColumna),(this.NFila + 1)*(this.longFila));
+      }
+      else{
+        vertex(this.posx, this.posy, (this.NColumna-2)*(this.longColumna), this.NFila*(this.longFila));
+        vertex((this.posx + TamañoFicha), (this.posy), (this.NColumna-1)*(this.longColumna), this.NFila*(this.longFila));
+        vertex((this.posx + TamañoFicha), (this.posy + TamañoFicha), (this.NColumna-1)*(this.longColumna) ,(this.NFila + 1)*(this.longFila));
+      }
+      endShape();
+      pop();
+    }
+   }  
