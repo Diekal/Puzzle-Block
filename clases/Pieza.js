@@ -45,20 +45,19 @@ class Pieza  {
     /**
    * @param { Array} tablero
    * @param { Array} pos
-   * @param { number} tamano
    */ 
    // este metodo es llamado cuando se suelta el click, si la jugada es valida guarda el poliomino en el tablero
-    guardar_tablero(tablero,pos){
-        for (var g = 0; g < this._shape.length; g++) {
-            for (var f = 0; f < this._shape[g].length; f++) {
-                    if (this._shape[g][f] != 0) {
-                        tablero[pos[0]+f][pos[1]+g]=this._shape[g][f];
-                        score +=10;
-                    }
-            }  
-        }
-        return tablero;
-    } 
+   guardar_tablero(tablero,pos){
+    for (var g = 0; g < this._shape.length; g++) {
+        for (var f = 0; f < this._shape[g].length; f++) {
+                if (this._shape[g][f] != 0) {
+                    tablero[pos[0]+f][pos[1]+g]=this._shape[g][f];
+                    score +=10;
+                }
+        }  
+    }
+    return tablero;
+}  
    /**
    * @returns {Array} 
    */ 
@@ -123,13 +122,11 @@ class P_cuadrado extends Pieza {
       push();
       stroke('black');
       strokeWeight(3);
-      //translate(this.posx,this.posy)
       translate(this.posx-((this._shape[0].length*this.longitud)/2),this.posy-((this._shape.length*this.longitud)/2));
       for (var i = 0; i < this._shape.length; i++) {
           for (var j = 0; j < this._shape[i].length; j++) {
               if (this._shape[i][j] != 0) {
                   fill(this._shape[i][j]);
-                  //this.dibujar_unidad(j * ((this.longitud/2)+(this.longitud*cos(TWO_PI /6)/2)), (i * this.longitud*sin(TWO_PI /6)-j*(this.longitud/2)*sin(TWO_PI /6)), this.longitud/2, 6);
                   this.dibujar_unidad(j * this.longitud, i * this.longitud, this.longitud, this.longitud);
               }
           }  
@@ -138,6 +135,8 @@ class P_cuadrado extends Pieza {
   }
   /**
  * @param { Array} tablero
+ * @returns {Array}
+ * 
  */
   // tomando como informacion las pociciones del tablero este metodo dibuja la posibilidad de juego.
   dibujar_sombra(tablero){
@@ -171,7 +170,7 @@ class P_cuadrado extends Pieza {
   }
 }
 
-class poli_hexagonos extends Poliomino{
+class Poli_hexagonos extends Pieza{
 
     dibujar_p()  {
         push();
@@ -188,22 +187,31 @@ class poli_hexagonos extends Poliomino{
         }
         pop();
     }
+    /**
+    * @param { Array} tablero
+    * @returns {Array}
+    */
     dibujar_sombra(tablero){
         this.jugada  = 0;
+        let dx=((60/2)+(60*cos(TWO_PI /6)/2));
+        let dy=60*sin(TWO_PI /6);
+        let B=(60/2)*sin(TWO_PI /6);
         for(let i=0;i<=(tablero.length-this._shape.length); i++){
             for(let j=0;j<=(tablero[i].length-this._shape[0].length); j++){
-                if(this.posx > (310 + (j * 48)) && this.posx < (310 + ((j+1) * 48))){
-                    if(this.posy > (45 + (i * 48)) && this.posy < (45 + ((i+1) * 48))){
+                if(this.posx > (425 + (j * dx)) && this.posx < (435 + ((j+1) * dx))){
+                    if(this.posy > (225 + (i * dy)-(j*B)) && this.posy < (225 + ((i+1) * dy)-(j*B))){
                         this.jugada = 1;
                         push();
                         stroke('black');
                         strokeWeight(3);
-                        translate(310 + (j * 48),45 + (i * 48));
+                        translate(425 +  (j * dx),225 + ((i * dy)-(j*B)));
                         for (var g = 0; g < this._shape.length; g++) {
                             for (var f = 0; f < this._shape[g].length; f++) {
                                     if (this._shape[g][f] != 0) {
                                         fill("#99CCFF");
-                                        this.dibujar_unidad(f * ((this.longitud/2)+(this.longitud*cos(TWO_PI /6)/2)), (g * this.longitud*sin(TWO_PI /6)-f*(this.longitud/2)*sin(TWO_PI /6)), this.longitud/2, 6);
+                                        if (tablero[j+f][i+g] != 0) {
+                                            this.dibujar_unidad(f * dx, ((g * dy)-(f*B)), 60/2, 6);
+                                        }
                                         if(tablero[j+f][i+g]!="#292B4A"){  //revisa que esa casilla este vacia
                                             this.jugada  = 0;
                                         }
@@ -211,12 +219,10 @@ class poli_hexagonos extends Poliomino{
                             }  
                          }
                         pop();
-                        break; 
+                        return [j,i]; 
                     }
                 }
             }
         }
     }
-
-
 }

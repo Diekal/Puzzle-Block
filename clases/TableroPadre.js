@@ -41,7 +41,7 @@ class Tablero {
                     if (this.TableroMemoria[k][m] == "💣"){
                         BombaEliminada = true;
                     }
-                    if (this.TableroMemoria[k][m] != "nulo"){
+                    if (this.TableroMemoria[k][m] != 0){
                         this.TableroMemoria[k][m] = "#292B4A";
                     } 
                 }
@@ -59,7 +59,7 @@ class Tablero {
             if (siEliminarColumna) {
                 var k = iME;
                 for (var m = 0; m < this.columna; m++) {
-                    if (this.TableroMemoria[m][k] != "nulo"){
+                    if (this.TableroMemoria[m][k] != 0){
                         this.TableroMemoria[m][k] = "#292B4A";
                     }
                 }
@@ -81,34 +81,32 @@ class Tablero {
     }
 }
 
-//class Tablero_cua extends Tablero{
-
-//}
-
 class Tablero_Hex extends  Tablero{
     
     crearTablero(){
-        this.TableroMemoria = [["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","nulo","nulo","nulo","nulo"],
-                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","nulo","nulo","nulo"],
-                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","nulo","nulo"],
-                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","nulo"],
+        this.TableroMemoria = [["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A",0,0,0,0],
+                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A",0,0,0],
+                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A",0,0],
+                               ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A",0],
                                ["#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
-                               ["nulo","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
-                               ["nulo","nulo","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
-                               ["nulo","nulo","nulo","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
-                               ["nulo","nulo","nulo","nulo","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"]];
+                               [0,"#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
+                               [0,0,"#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
+                               [0,0,0,"#292B4A","#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"],
+                               [0,0,0,0,"#292B4A","#292B4A","#292B4A","#292B4A","#292B4A"]];
     }
 
     dibujarTablero() { 
         push();
         stroke('black');
         strokeWeight(3);
+        translate(425,225);
         for (var co = 0; co < this.columna; co++) {
             for (var f = 0; f < this.fila; f++) {
-                if (this.TableroMemoria[co][f]!="nulo"){
-                    fill(this.TableroMemoria[co][f]);
-                    this.dibujar_unidad(j * ((this.tamaño/2)+(this.tamaño*cos(TWO_PI /6)/2)), (i * this.tamaño*sin(TWO_PI /6)-j*(this.tamaño/2)*sin(TWO_PI /6)), this.tamaño/2, 6);
-                }
+                if (this.TableroMemoria[f][co]!=0){
+                    fill(this.TableroMemoria[f][co]);
+                    this.dibujar_unidad(f * ((this.tamaño/2)+(this.tamaño*cos(TWO_PI /6)/2)), ((co * this.tamaño*sin(TWO_PI /6))-(f*(this.tamaño/2)*sin(TWO_PI /6))), this.tamaño/2, 6);
+                }                
+
             }
         }
         pop();    
