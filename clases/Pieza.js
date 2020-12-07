@@ -19,12 +19,12 @@ class Pieza  {
    * @param {number} mX posicion en x
    * @param {number} mY posicion en y
    */ 
-    //este metodo recibe la posicion del mouse y lee la pocicion del poliomino para permitir su movimiento
+    //este metodo recibe la posicion del mouse y lee la pocicion de la figura para permitir su movimiento
     move_p(mX,mY){
         this.posx = mX;
         this.posy = mY;
     }
-    
+    // recibe la posicion del mause para verificar si este se encuentra bajo el rango de accion de la figura en cuestion
     verificar_p(mX,mY){
         if (mX >= ((this.posx)-((this._shape[0].length*this.longitud)) ) &&  mX <= ((this.posx)+((this._shape[0].length*this.longitud)))) {
             if (mY >= ((this.posy)-((this._shape.length*this.longitud)))  &&  mY <= ((this.posy)+((this._shape.length*this.longitud)))){
@@ -32,6 +32,7 @@ class Pieza  {
            }
         }
     }
+    //dado una cantidad de lados y un tamaño, esta funcion dibuja cualquier tipo de poligono regular.
     dibujar_unidad(x, y, radius, npoints) {
         let angle = TWO_PI / npoints;
         beginShape();
@@ -46,6 +47,8 @@ class Pieza  {
    * @param { Array} tablero
    * @returns {Array}
    */
+
+   //dibuja la sombra de la ficha sobre el tablero, teniendo en cuenta el tipo de ficha
     dibujar_sombra(tablero,poscx,poscy,longit,radio,lados){
         this.jugada  = 0;
         for(let i=0;i<=(tablero.length-this._shape.length); i++){
@@ -146,11 +149,11 @@ class Pieza  {
     }
 }
 class P_cuadrado extends Pieza {
-
-
+//Cambia la forma de dibujar_unidad debido a que para este caso con el metodo base se dibujaria un rombo y no el cuadrado deseado
   dibujar_unidad(x, y, dx, dy) {
       rect(x,y,dx, dy);
   }
+  // la lectura del tablero es difenrente por lo que se debe replantear este metodo
   dibujar_p()  {
       push();
       stroke('black');
@@ -166,6 +169,7 @@ class P_cuadrado extends Pieza {
       }
       pop();
   }
+  // dado que la figura que se forma es diferente al tipo de figura ya planteada, se modifica el campo de accion del poliomino
   verificar_p(mX,mY){
     if (mX >= ((this.posx)-((this._shape[0].length*this.longitud)/2) ) &&  mX <= ((this.posx)+((this._shape[0].length*this.longitud)/2))) {
         if (mY >= ((this.posy)-((this._shape.length*this.longitud)/2))  &&  mY <= ((this.posy)+((this._shape.length*this.longitud)/2))){
@@ -176,7 +180,7 @@ class P_cuadrado extends Pieza {
 }
 
 class Poli_hexagonos extends Pieza{
-
+    // es necesario especificar la pocicion de cada unidad del poliomino para que el mosaico sea coherente
     dibujar_p()  {
         push();
         stroke('black');
@@ -196,6 +200,7 @@ class Poli_hexagonos extends Pieza{
     * @param { Array} tablero
     * @returns {Array}
     */
+   // dado que el tablero es ligeramente diferente es necesario replantear su lectura
     dibujar_sombra(tablero){
         this.jugada  = 0;
         let dx=((60/2)+(60*cos(TWO_PI /6)/2));
@@ -233,6 +238,7 @@ class Poli_hexagonos extends Pieza{
 }
 
 class Poligono extends Pieza{
+    //Se plante la distribucion de cada unidad de los poliominos 
     dibujar_p(lados)  {
         push();
         stroke('black');
@@ -249,38 +255,3 @@ class Poligono extends Pieza{
         pop();
     }
 }
-
-class Ficha extends Pieza{
-    constructor(px,py,longColumna,LongFila,NFila,NColumna){
-      super(px,py,longColumna);
-      this.longColumna = longColumna;
-      this.longFila = LongFila;
-      this.PNCol = NColumna;
-      if (NColumna == 0 || NColumna == 1){
-        this.NColumna = NColumna + 1;}
-      else{
-        this.NColumna = NColumna;
-    }
-      this.NFila = NFila;
-    }
-    show(img,TamañoFicha){
-      noStroke();
-      texture(img);
-      textureMode(IMAGE);
-      push();
-      translate(this.posx, this.posy);
-      beginShape();
-      if (this.PNCol % 2 == 0) {
-        vertex(this.posx, this.posy, (this.NColumna-1)*(this.longColumna), this.NFila*(this.longFila));
-        vertex((this.posx), (this.posy + TamañoFicha), (this.NColumna-1)*(this.longColumna), (this.NFila + 1)*(this.longFila));
-        vertex((this.posx + TamañoFicha), (this.posy + TamañoFicha), (this.NColumna)*(this.longColumna),(this.NFila + 1)*(this.longFila));
-      }
-      else{
-        vertex(this.posx, this.posy, (this.NColumna-2)*(this.longColumna), this.NFila*(this.longFila));
-        vertex((this.posx + TamañoFicha), (this.posy), (this.NColumna-1)*(this.longColumna), this.NFila*(this.longFila));
-        vertex((this.posx + TamañoFicha), (this.posy + TamañoFicha), (this.NColumna-1)*(this.longColumna) ,(this.NFila + 1)*(this.longFila));
-      }
-      endShape();
-      pop();
-    }
-   }  
