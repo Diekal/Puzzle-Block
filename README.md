@@ -1,14 +1,19 @@
 # Rompecabezas, poliformas, mosaicos y más...
-El principal objetivo de este proyecto es plantear una serie de codigos base orientados a objetos, que sirvan como base para el desarrollo de videojuegos sencillos tipo rompecabeza, que podrian tener como principal funcionalidad en la sociedad el 
-## Puzzle-Block
-El juego consiste en poner fichas o polinomios de diferentes tamaños en un tablero con el fin de poder eliminar la mayor cantidad de filas y columnas posibles.Para esto se tienen 4 clases. Las principales siendo la clase tablero y la clase poliomino.
+El principal objetivo de este proyecto es plantear una serie de codigos base orientados a objetos, que sirvan como base para el desarrollo de videojuegos sencillos tipo rompecabeza utilizando conceptos fundamentales de la poo como lo es la herencia y el polimorfismo.Estos aplicativos  podrian tener como principal funcionalidad en la sociedad el entretenimiento y la educacion.
+Dicho esto se plantearon las siguente clases base:
+1. Pieza.
+2. Tablero.
+3. Marcos.
+4. Bombas.
+
 ## Class Tablero
 ### Atributos:
 Columna:Indica la cantidad de columnas que va a tener el tablero.
 Fila: Es el numero de filas
 TableroEnMemoria:Es una matriz de colores donde se guarda la ubicacion de los polinomios en memoria.
+Tamaño: Indica el tamaño que tendria cada unidad del tablero.
 ### Métodos:
-La clase tablero tiene tres métodos:
+La clase tablero tiene cuatro métodos:
 El método crear tablero que crear una matriz de el tamaño de las filas y columnas toda formada por el color azul oscuro que indica un espacio libre.
 ```
 crearTablero() {
@@ -37,8 +42,18 @@ El método dibujarTablero que dibuja los cuadrados de la matriz dependiendo del 
         }
     }
  ```
-Y el método EliminarFilasColumnas que elimina tanto las filas como las columnas cuando están ocupadas es decir cuando en la matriz de memoria esa fila o columna tiene todos sus valores diferentes al azul oscuro. 
-## Class Poliomino
+El metodo dibujar unidad que dibuja de manera general la unidad del tablero y  el método EliminarFilasColumnas que elimina tanto las filas como las columnas cuando están ocupadas es decir cuando en la matriz de memoria esa fila o columna tiene todos sus valores diferentes al azul oscuro. 
+
+De esta clase "padre" entonces surgen las siguientes clase "hijas" que extienden su funcionalidad de una manera mas especifica.
+
+### Tablero_Hex.
+Replantea los metodos de crear tablero y dibujar tablero con el fin de generar una tablero exclucivo para hexagonos.
+### Tablero_poligono.
+Replantea de manera general el metodo de dibujar tablero para cada caso generado por los diferente poligonos regulares.
+### Tablerorompecabezas.
+Extiende la clase con el objetivo de que ahora el tablero funcione para el caso especifico de un rompecabesaz generado a partir de una imagen. 
+
+## Class Pieza.
 ### Atributos:
 shape : Es la figura o el polinomio que se va a dibujar.
 firstposx: Es la primera posición en x.
@@ -47,8 +62,8 @@ posx:posición en x actual.
 posy: posición en y actual.
 longitud: tamaño del los cuadrados que forman la figura.
 ### Métodos:
-La clase polinomio tiene el método de mover_p la cual mueve el poliomino. Ademas tiene el método dibujar_p que dibuja el poliomino de acuerdo a su posición en x y y.
-Tiene adicionalmente el método dibujar_sombra la cual dibuja una sombra de color azul claro cuando se arrastra la figura sobre el tablero e indica donde se va ha ubicar la ficha en el tablero.
+La clase polinomio tiene el método de mover_p y verificar_p los cuales mueven el poliomino. Ademas tiene el método dibujar_p que dibuja el poliomino de acuerdo a su posición en x y y.
+Tiene adicionalmente el método dibujar_sombra y guardar tablero que son los encargados de interactuar con el tablero por ejemplo dibujar_sombra  dibuja una sombra de color azul claro cuando se arrastra la figura sobre el tablero e indica donde se va ha ubicar la ficha en el tablero.
  ```
  dibujar_sombra(tablero){
         var accion = Boolean(false);
@@ -79,14 +94,25 @@ Tiene adicionalmente el método dibujar_sombra la cual dibuja una sombra de colo
             }
         }
     }
-  ```
-  Y por ultimo esta el método elegir_p que escoge cual figura se va a dibujar.
+```
+Por otro lado, se agrego el metodo dibujar_unidad en que se define la forma que tendra cada unidad de polomino y por ultimo esta el método elegir_p que escoge cual figura se va a dibujar y guarda la memoria de todos los posible poliominos.
+
+De esta clase "padre" entonces surgen las siguientes clase "hijas" que extienden su funcionalidad de una manera mas especifica.
+### P_cuadrado.
+Replantea 
+### Tablero_poligono.
+Replantea de manera general el metodo de dibujar tablero para cada caso generado por los diferente poligonos regulares.
+### Tablerorompecabezas.
+Extiende la clase con el objetivo de que ahora el tablero funcione para el caso especifico de un rompecabesaz generado a partir de una imagen. 
+
 ## Class Bombas
 El propósito de las bombas es que se ponen en un lugar alzar en el tablero y usuario tiene que eliminarlas antes que exploten o sino pierde.
 ## Atributos
 Tiempo:Es el tiempo que ha transcurrida desde que se creo la bomba en segundos.
 Cols: Es un numero alzar del 0 al 11 luego este numero sera la columna en la que va aparecer la bomba.
 Fil: Es un numero alazar del 0 al 11 que sera la fila.
+## Puzzle-Block
+El juego consiste en poner fichas o polinomios de diferentes tamaños en un tablero con el fin de poder eliminar la mayor cantidad de filas y columnas posibles.Para esto se tienen 4 clases. Las principales siendo la clase tablero y la clase poliomino.
 ## Referencias .
 1. [Juego guia tomado como referencia.](https://play.google.com/store/apps/details?id=game.puzzle.blockpuzzle&hl=es)
 2. [Plantilla de p5 dado por el profesor.](https://github.com/objetos/p5.polyomino.js)
