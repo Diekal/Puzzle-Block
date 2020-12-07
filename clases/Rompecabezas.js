@@ -235,8 +235,8 @@ var Puzzle;
 var img;
 var FichaAx = 0;
 var FichaAy = 0;
-var CColumnas = 2;
-var CFilas = 2;
+var CColumnas = 4;
+var CFilas = 4;
 var TamañoFicha = 400/CColumnas;
 var x1;
 var y1;
@@ -256,13 +256,13 @@ function draw() {
   background(255);
   fill('#222222');
   rect(80,-400,400,400);
-  for (var x = 0; x < CColumnas; x++) {;
-    for (var j = 0; j < (CFilas * 2); j++) {
+  for (var x = 0; x < CFilas; x++) {;
+    for (var j = 0; j < (CColumnas * 2); j++) {
         Puzzle.TableroMemoria[x][j].show();
         }
       }
   if (Perdiste){
-    image(img2, 100, -330, 800, 700);
+    image(img2, 100, -230, 800, 500);
   }
 }
 function mouseDragged() {
@@ -273,6 +273,7 @@ function mouseDragged() {
   catch{
     var ValorMenor = -1;
     for (var xE = 0; xE < Piezas.length; xE++){
+      console.log(Piezas[xE]);
       if (ValorMenor > Piezas[xE]){
         Perdiste = true;
         return Perdiste;
@@ -284,41 +285,28 @@ function mouseDragged() {
 function mousePressed(){
 }
 function mouseReleased(){
-  if ((x1 >= 30 && x1 <= 50) && y1 <= -190){
-    Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(40, -200);
-    if (FichaAy %2 ==0){
-      Piezas.push(0)
+  if (CColumnas >= 4){
+     CColumnas -= 1;}
+  var Tempx1 = 30; 
+  var Tempy1 = -190;
+  var NFichasF = 1;   
+  for(var E = 0; E < ((CColumnas * 2) * CFilas); E++){
+    if (x1 >= Tempx1 && x1 <= (Tempx1 + 30)){
+      if(y1 <= Tempy1 && y1 >= (Tempy1 - 30)){
+      Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(Tempx1 + 10, Tempy1 -10);
+      if(FichaAy % 2 ==0){
+      Piezas.push(E);
+       }
+      }
     }
-    else{
-      Piezas.push(1)
+    if(E % 2 != 0){
+       Tempx1 += (TamañoFicha/2);}
+    if(NFichasF >= CColumnas * 2){
+    Tempx1 = 30;
+    Tempy1 += (TamañoFicha/2);
+    NFichasF = 0;
     }
-  }
-  if ((x1 >= 130 && x1 <= 150) && y1 <= -190){
-    Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(140, -200);
-    if (FichaAy %2 ==0){
-      Piezas.push(2)
-    }
-    else{
-      Piezas.push(3)
-    }
-  }
-  if ((x1 >= 30 && x1 <= 50) && y1 >= -110){
-    Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(40, -100);
-    if (FichaAy %2 ==0){
-      Piezas.push(4)
-    }
-    else{
-      Piezas.push(5)
-    }
-   }
-  if ((x1 >= 130 && x1 <= 150) && y1 >= -110){
-    Puzzle.TableroMemoria[FichaAx][FichaAy].move_p(140, -100);
-    if (FichaAy %2 ==0){
-      Piezas.push(6)
-    }
-    else{
-      Piezas.push(7)
-    }
+    NFichasF += 1; 
   }
   if (FichaAy > CFilas){
     FichaAy = - 1;
