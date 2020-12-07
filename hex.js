@@ -1,4 +1,3 @@
-//Se declaran los objetos a usar
 var PrimerMarco;
 var SegundoMarco; 
 var TercerMarco;
@@ -17,7 +16,6 @@ var perder = Boolean(false);
 var movimiento = Boolean(false);
 var movimiento2 = Boolean(false);
 var movimiento3 = Boolean(false);
-var BombaEliminada = true;
 function setup() {
     //se define cada objeto
     createCanvas(1200, 660);
@@ -25,18 +23,15 @@ function setup() {
     SegundoMarco = new MarcosCuadros(280, 15, 635, 635, 1);
     TercerMarco = new MarcosCuadros(960, 330, 200, 300, 1);
     CuartoMarco = new MarcosCuadros(1050, 165, 200, 250, 2);
-    tablero = new Tablero( 12, 12,48);
-    poliomino = new P_cuadrado(135,150,30);
-    poliomino2 = new P_cuadrado(135,300,30);
-    poliomino3 = new P_cuadrado(135,450,30);
+    tablero = new Tablero_Hex( 9, 9, 60);
+    poliomino = new Poli_hexagonos(135,150,30);
+    poliomino2 = new Poli_hexagonos(135,300,30);
+    poliomino3 = new Poli_hexagonos(135,450,30);
     tablero.crearTablero();
-    bomba = new Bombas();
-    bomba.crearBomba();
 }
 
 function draw() {
-    if (perder == false){
-        background(255);
+        background("#292B4A");
         PrimerMarco.dibujar();
         SegundoMarco.dibujar();
         TercerMarco.dibujar();
@@ -50,28 +45,14 @@ function draw() {
         poliomino.dibujar_p();
         poliomino2.dibujar_p();
         poliomino3.dibujar_p();
-        //Se agrega el texto del puntaje y el avance
+        //Se agrega el texto del puntaje y el avance   
         textSize(35);
+        fill(0);
         textFont('STCaiyun');
         text("Score", 1010, 100);
         text(score, 1025, 140);
         text("Lineas", 1010, 190);
-        text(FilasCompletas, 1035, 230);   
-        if (Turnos % 5 == 0 ){
-            bomba = new Bombas();
-            bomba.crearBomba();
-        Turnos =1;
-        }
-    }else{
-        background(0);
-        fill(255);
-        textSize(60);
-        textFont('STCaiyun');
-        text("Game", 500, 300);
-        text("Over", 500, 350);
-    }
-
-
+        text(FilasCompletas, 1035, 230);
 }
 function mousePressed(){
     movimiento=poliomino.verificar_p(mouseX,mouseY);
@@ -101,24 +82,21 @@ function mouseReleased(){
         poliomino.posy=poliomino.firstposy;
     }else{
         tablero.TableroMemoria=poliomino.guardar_tablero(tablero.TableroMemoria,posicion);
-        poliomino = new P_cuadrado(135,150,30);
-        Turnos += 1;
+        poliomino = new Poli_hexagonos(135,150,30);
     }
     if (poliomino2.jugada==0 ){
         poliomino2.posx=poliomino2.firstposx;
         poliomino2.posy=poliomino2.firstposy;
     }else{
         tablero.TableroMemoria=poliomino2.guardar_tablero(tablero.TableroMemoria,posicion2);
-        poliomino2 = new P_cuadrado(135,300,30);
-        Turnos += 1;
+        poliomino2 = new Poli_hexagonos(135,300,30);
     }
     if (poliomino3.jugada==0 ){
         poliomino3.posx=poliomino3.firstposx;
         poliomino3.posy=poliomino3.firstposy;
     }else{
         tablero.TableroMemoria=poliomino3.guardar_tablero(tablero.TableroMemoria,posicion3);
-        poliomino3 = new P_cuadrado(135,450,30);
-        Turnos += 1;
+        poliomino3 = new Poli_hexagonos(135,450,30);
     }
     movimiento=false;
     movimiento2=false;
@@ -127,7 +105,4 @@ function mouseReleased(){
 }
 function debugPolyomino(poliomino) {
     console.log(poliomino._shape);
-}
-function Perdiste(){
-    perder = true;
 }
