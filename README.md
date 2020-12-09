@@ -125,6 +125,9 @@ Es una expancion de el original Puzzle-Block con la variante de que ahora se tab
 Uno de los tantos posibles rompecabezas basados en una imagen, este codigo se podria modificar con fines educativos si es esto lo que se busca.
 ## Pologonos-Block.
 Otra variante del puzzle-block, pero esta vez generalizado par que sea posible modificar la unidad de cada figura por un poligono regular de cualquier numero de lados, a partir de este codigo se puede generar una inmenza cantidad de mosaicos.
+
+<p align="center"><img src="Diagrama.png" width="40%"></p>
+
 ## Referencias .
 1. [Juego guia tomado como referencia.](https://play.google.com/store/apps/details?id=game.puzzle.blockpuzzle&hl=es)
 2. [Plantilla de p5 dado por el profesor.](https://github.com/objetos/p5.polyomino.js)
